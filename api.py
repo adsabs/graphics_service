@@ -2,24 +2,27 @@ import sys
 import ptree
 from flask import Flask
 from flask import request
-from flask import jsonify
-from flask.ext.restful import abort, Api, Resource
+from flask import Blueprint
+from flask.ext.restful import Api, Resource
 from config import config
 from graphics_utils import get_graphics
 
-app = Flask(__name__)
-api = Api(app)
+app_blueprint = Blueprint('api', __name__)
+api = Api(app_blueprint)
 
 class Graphics(Resource):
+    """"Return graphics information for a given bibcode"""
+    scope = 'oauth:graphics:read'
     def get(self, bibcode):
        try:
            results = get_graphics(bibcode)
        except Exception, err:
-            sys.stderr.write('Unable to get results! (%s)' % err)
-            abort(400)
-       return jsonify(results)
+           return {'msg': 'Unable to get results! (%s)' % err}, 500
+       return results
 
 class DisplayGraphics(Resource):
+    """Return image data for a given figure"""
+    scope = 'oauth:displaygraphics:read'
     def get(self,bibcode,figure_id,image_format):
         format2ext = {'tb':'gif','lr':'jpg','hr':'png'}
         image_ext = format2ext.get(image_format,'png')
@@ -34,8 +37,17 @@ class DisplayGraphics(Resource):
         return image_data, 200, header
 
 class Resources(Resource):
+    """Overview of available resources"""
+    scope = 'oauth:resources:read'
     def get(self):
-      return config.RESOURCES
+        func_list = {}
+        for rule in app.url_map.iter_rules():
+            func_list[rule.rule] = {'methods':app.view_functions[rule.endpoint].methods,
+                                    'scope': app.view_functions[rule.endpoint].view_class.scope,
+                                    'description': app.view_functions[rule.endpoint].view_class.__doc__,
+                                       }
+        return func_list
+
 ##
 ## Actually setup the Api resource routing here
 ##
@@ -44,4 +56,6 @@ api.add_resource(DisplayGraphics,'/<string:bibcode>/<string:figure_id>/<string:i
 api.add_resource(Resources, '/resources')
 
 if __name__ == '__main__':
+    app = Flask(__name__, static_folder=None)
+    app.register_blueprint(app_blueprint)
     app.run(debug=True)
