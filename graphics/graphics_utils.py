@@ -10,6 +10,7 @@ import os
 import simplejson as json
 import random
 import ptree
+from flask import current_app
 # modules for querying PostgreSQL
 from sqlalchemy import Column, Integer, String, DateTime, Boolean
 from sqlalchemy.ext.declarative import declarative_base, DeclarativeMeta
@@ -17,7 +18,6 @@ from sqlalchemy.dialects import postgresql
 from sqlalchemy.orm import relationship, sessionmaker
 from sqlalchemy import create_engine
 # local imports
-from config import config
 
 __all__ = ['get_graphics']
 
@@ -62,7 +62,7 @@ class Graphics(Base):
   modtime = Column(DateTime)
 
 def get_graphics(bibcode):
-    engine = create_engine(config.SQLALCHEMY_DATABASE_URI)
+    engine = create_engine(current_app.config['SQLALCHEMY_DATABASE_URI'])
     Base.metadata.create_all(engine)
     DBSession = sessionmaker(bind=engine)
     session = DBSession()
