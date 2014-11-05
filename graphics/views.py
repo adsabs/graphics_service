@@ -3,7 +3,7 @@ from flask.ext.restful import Resource
 import time
 import ptree
 
-from graphics_utils import get_graphics
+from uils.graphics import get_graphics
 
 blueprint = Blueprint(
       'graphics',
