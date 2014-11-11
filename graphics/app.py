@@ -10,7 +10,7 @@ def create_app():
   api.add_resource(UnixTime, '/time')
   api.add_resource(PrintArg,'/print/<string:arg>')
   api.add_resource(ExampleApiUsage,'/search')
-  api.add_resource(Graphics, '/graphics/<string:bibcode>')
+  api.add_resource(Graphics, '/<string:bibcode>')
   api.add_resource(DisplayGraphics,'/<string:bibcode>/<string:figure_id>/<string:image_format>')
 
   app = Flask(__name__, static_folder=None)
