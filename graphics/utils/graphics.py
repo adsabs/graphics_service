@@ -13,13 +13,11 @@ import ptree
 from flask import current_app
 # modules for querying PostgreSQL
 from sqlalchemy import Column, Integer, String, DateTime, Boolean
-from sqlalchemy.ext.declarative import declarative_base, DeclarativeMeta
+from sqlalchemy.ext.declarative import DeclarativeMeta
 from sqlalchemy.dialects import postgresql
-from sqlalchemy.orm import relationship, sessionmaker
-from sqlalchemy import create_engine
-# local imports
+from flask.ext.sqlalchemy import SQLAlchemy
 
-__all__ = ['get_graphics']
+db = SQLAlchemy()
 
 thumb_link = '<a href="%s" target="_new" border=0><img src="%s" width="100px"></a>'
 graph_link = '<a href="graphics" border=0><img src="%s"></a>'
@@ -48,9 +46,7 @@ class AlchemyEncoder(json.JSONEncoder):
 
         return json.JSONEncoder.default(self, obj)
 
-Base = declarative_base()
-
-class Graphics(Base):
+class Graphics(db.Model):
   __tablename__='graphics'
 
   id = Column(Integer,primary_key=True)
@@ -62,10 +58,7 @@ class Graphics(Base):
   modtime = Column(DateTime)
 
 def get_graphics(bibcode):
-    engine = create_engine(current_app.config['SQLALCHEMY_DATABASE_URI'])
-    Base.metadata.create_all(engine)
-    DBSession = sessionmaker(bind=engine)
-    session = DBSession()
+    session = db.session()
     resp = session.query(Graphics).filter(Graphics.bibcode==bibcode).one()
     results = json.loads(json.dumps(resp, cls=AlchemyEncoder))
     
