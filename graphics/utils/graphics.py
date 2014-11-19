@@ -59,9 +59,11 @@ class Graphics(db.Model):
 
 def get_graphics(bibcode):
     session = db.session()
-    resp = session.query(Graphics).filter(Graphics.bibcode==bibcode).one()
-    results = json.loads(json.dumps(resp, cls=AlchemyEncoder))
-    
+    try:
+        resp = session.query(Graphics).filter(Graphics.bibcode==bibcode).one()
+        results = json.loads(json.dumps(resp, cls=AlchemyEncoder))
+    except:
+        results = {}
     if results and 'figures' in results:
         eprint = results.get('eprint')
         source = results.get('source','NA')
