@@ -19,7 +19,10 @@ class Graphics(Resource):
            results = get_graphics(bibcode)
        except Exception, err:
            return {'msg': 'Unable to get results! (%s)' % err}, 500
-       return results
+       if results:
+           return results
+       else:
+           return {'msg': 'No image data available! (%s)' % bibcode}, 204
 
 class DisplayGraphics(Resource):
     """Return image data for a given figure"""
