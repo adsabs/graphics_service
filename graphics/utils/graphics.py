@@ -9,7 +9,6 @@ import sys
 import os
 import simplejson as json
 import random
-import ptree
 from flask import current_app
 # modules for querying PostgreSQL
 from sqlalchemy import Column, Integer, String, DateTime, Boolean
