@@ -16,6 +16,7 @@ blueprint = Blueprint(
 class Graphics(Resource):
     """"Return graphics information for a given bibcode"""
     scopes = []
+    rate_limit = [1000,60*60*24]
     def get(self, bibcode):
        try:
            results = get_graphics(bibcode)
@@ -29,6 +30,7 @@ class Graphics(Resource):
 class DisplayGraphics(Resource):
     """Return image data for a given figure"""
     scopes = []
+    rate_limit = [1000,60*60*24]
     def get(self,bibcode,figure_id,image_format):
         format2ext = {'tb':'gif','lr':'jpg','hr':'png'}
         image_ext = format2ext.get(image_format,'png')
