@@ -22,11 +22,12 @@ class Graphics(Resource):
            results = get_graphics(bibcode)
        except Exception, err:
            return {'msg': 'Unable to get results! (%s)' % err}, 500
-       if results:
+       if results and results['query'] == 'OK':
            return results
-       else:
+       elif results.get('error','NA') == 'no data':
            return {'msg': 'No image data available! (%s)' % bibcode}, 204
-
+       else:
+           return {'msg': 'Unable to get results! (%s)' % results.get('error','NA')}, 500
 class DisplayGraphics(Resource):
     """Return image data for a given figure"""
     scopes = []

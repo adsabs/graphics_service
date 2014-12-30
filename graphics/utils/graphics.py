@@ -25,9 +25,6 @@ ADSASS_thmb_img  = '<img src="%s" width="100px">'
 ADSASS_thmb_link = '<a href="graphics" border=0>%s</a>'
 ADS_image_url = 'http://articles.adsabs.harvard.edu/cgi-bin/nph-iarticle_query?bibcode=%s&db_key=AST&page_ind=%s&data_type=GIF&type=SCREEN_VIEW'
 
-class PostgresQueryError(Exception):
-    pass
-
 class AlchemyEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj.__class__, DeclarativeMeta):
@@ -61,8 +58,15 @@ def get_graphics(bibcode):
     try:
         resp = session.query(Graphics).filter(Graphics.bibcode==bibcode).one()
         results = json.loads(json.dumps(resp, cls=AlchemyEncoder))
-    except:
+        results['query'] = 'OK'
+    except Exception, err:
         results = {}
+        results['query' ] = 'failed'
+        if 'row' in str(err):
+           results['error'] = 'no data' 
+        else:
+           results['error'] = err
+
     if results and 'figures' in results:
         eprint = results.get('eprint')
         source = results.get('source','NA')
