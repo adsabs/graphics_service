@@ -3,18 +3,11 @@ Created on Nov 2, 2014
 
 @author: ehenneken
 '''
-
-# general module imports
 import sys
 import os
 import simplejson as json
 import random
 from flask import current_app
-# modules for querying PostgreSQL
-from sqlalchemy import Column, Integer, String, DateTime, Boolean
-from sqlalchemy.ext.declarative import DeclarativeMeta
-from sqlalchemy.dialects import postgresql
-from flask.ext.sqlalchemy import SQLAlchemy
 from database import db, AlchemyEncoder, Graphics
 
 thumb_link = '<a href="%s" target="_new" border=0><img src="%s" width="100px"></a>'
