@@ -25,9 +25,8 @@ ADSASS_thmb_link = '<a href="graphics" border=0>%s</a>'
 ADS_image_url = 'http://articles.adsabs.harvard.edu/cgi-bin/nph-iarticle_query?bibcode=%s&db_key=AST&page_ind=%s&data_type=GIF&type=SCREEN_VIEW'
 
 def get_graphics(bibcode):
-    session = db.session()
     try:
-        resp = session.query(Graphics).filter(Graphics.bibcode==bibcode).one()
+        resp = db.session.query(Graphics).filter(Graphics.bibcode==bibcode).one()
         results = json.loads(json.dumps(resp, cls=AlchemyEncoder))
         results['query'] = 'OK'
     except Exception, err:
