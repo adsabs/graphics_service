@@ -31,7 +31,6 @@ class AlchemyEncoder(json.JSONEncoder):
 
 class Graphics(db.Model):
   __tablename__='graphics'
-  __bind_key__ = 'graphics_db'
   id = Column(Integer,primary_key=True)
   bibcode = Column(String,nullable=False,index=True)
   doi = Column(String)
