@@ -6,3 +6,7 @@ SQLALCHEMY_BINDS = {}
 CLIENT = {
   'TOKEN': 'we will provide an api key token for this application'
 }
+# Define the autodiscovery endpoint
+DISCOVERER_PUBLISH_ENDPOINT = '/resources'
+# Advertise its own route within DISCOVERER_PUBLISH_ENDPOINT
+DISCOVERER_SELF_PUBLISH = False
