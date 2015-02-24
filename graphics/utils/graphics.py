@@ -18,19 +18,32 @@ ADSASS_thmb_link = '<a href="graphics" border=0>%s</a>'
 ADS_image_url = 'http://articles.adsabs.harvard.edu/cgi-bin/nph-iarticle_query?bibcode=%s&db_key=AST&page_ind=%s&data_type=GIF&type=SCREEN_VIEW'
 
 def get_graphics(bibcode):
+    # Query graphics database with bibcode supplied
     try:
+        # Data is returned
         resp = db.session.query(Graphics).filter(Graphics.bibcode==bibcode).one()
         results = json.loads(json.dumps(resp, cls=AlchemyEncoder))
         results['query'] = 'OK'
     except Exception, err:
+        # Exception is thrown, either because there is no entry or database
+        # cannot be queried
         results = {}
         results['query' ] = 'failed'
         if 'row' in str(err):
-           results['error'] = 'no data' 
+           # In this case there was no entry for the bibcode given
+           results['error'] = 'no database entry found for %s' % bibcode 
         else:
+           # In this case the query blew up because of connection problems
            results['error'] = err
+           raise
 
     if results and 'figures' in results:
+        if len(results['figures']) == 0:
+            # There are cases where an entry exists, but the 'figures'
+            # list is empty. Report this as if no data exists.
+            results['query'] = 'failed'
+            results['error'] = 'no data found for %s' % bibcode
+            return results
         eprint = results.get('eprint')
         source = results.get('source','NA')
         results['widgets'] = []
