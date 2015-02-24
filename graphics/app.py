@@ -1,8 +1,9 @@
 import os
 from flask import Blueprint
 from flask import Flask, g
-from views import blueprint, Resources, Graphics, DisplayGraphics
+from views import blueprint, Graphics, DisplayGraphics
 from flask.ext.restful import Api
+from flask.ext.discoverer import Discoverer
 from client import Client
 from utils.database import db
 
@@ -18,7 +19,6 @@ def create_app(blueprint_only=False):
   app.client = Client(app.config['CLIENT'])
 
   api = Api(blueprint)
-  api.add_resource(Resources, '/resources')
   api.add_resource(Graphics, '/<string:bibcode>')
   api.add_resource(DisplayGraphics,'/<string:bibcode>/<string:figure_id>/<string:image_format>')
 
@@ -27,7 +27,11 @@ def create_app(blueprint_only=False):
 
   app.register_blueprint(blueprint)
   db.init_app(app)
+
+  discoverer = Discoverer(app)
+
   return app
 
 if __name__ == "__main__":
+  app = create_app()
   app.run()
