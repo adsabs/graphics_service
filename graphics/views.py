@@ -15,7 +15,7 @@ blueprint = Blueprint(
 )
 
 class Graphics(Resource):
-    """"Return graphics information for a given bibcode"""
+    """Return graphics information for a given bibcode"""
     scopes = []
     rate_limit = [1000,60*60*24]
     decorators = [advertise('scopes','rate_limit')]
