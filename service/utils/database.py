@@ -29,7 +29,7 @@ class AlchemyEncoder(json.JSONEncoder):
 
         return json.JSONEncoder.default(self, obj)
 
-class Graphics(db.Model):
+class GraphicsModel(db.Model):
   __tablename__='graphics'
   __bind_key__ ='graphics'
   id = Column(Integer,primary_key=True)
