@@ -8,7 +8,7 @@ import os
 import simplejson as json
 import random
 from flask import current_app
-from database import db, AlchemyEncoder, Graphics
+from database import db, AlchemyEncoder, GraphicsModel
 
 thumb_link = '<a href="%s" target="_new" border=0><img src="%s" width="100px"></a>'
 graph_link = '<a href="graphics" border=0><img src="%s"></a>'
@@ -21,7 +21,7 @@ def get_graphics(bibcode):
     # Query graphics database with bibcode supplied
     try:
         # Data is returned
-        resp = db.session.query(Graphics).filter(Graphics.bibcode==bibcode).one()
+        resp = db.session.query(GraphicsModel).filter(GraphicsModel.bibcode==bibcode).one()
         results = json.loads(json.dumps(resp, cls=AlchemyEncoder))
         results['query'] = 'OK'
     except Exception, err:
@@ -36,7 +36,6 @@ def get_graphics(bibcode):
            # In this case the query blew up because of connection problems
            results['error'] = err
            raise
-
     if results and 'figures' in results:
         if len(results['figures']) == 0:
             # There are cases where an entry exists, but the 'figures'
@@ -101,6 +100,9 @@ def get_graphics(bibcode):
                     highr_url = image['highres']
                     lowrs_url = image['lowres']
                     results['widgets'].append('<div class="imageSingle"><div class="image">'+thumb_link % (highr_url,highr_url)+'</div></div>')
+        elif source.upper() == 'TEST':
+            results['pick'] = display_figure
+            return results
         else:
             results = {}
     if not results:
