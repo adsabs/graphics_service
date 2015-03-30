@@ -45,7 +45,6 @@ def get_graphics(bibcode):
             return results
         eprint = results.get('eprint')
         source = results.get('source','NA')
-        results['widgets'] = []
         results['ADSlink'] = []
         if not eprint:
             results['figures'] = filter(lambda a: a['figure_label'] != None, results['figures'])
@@ -66,7 +65,6 @@ def get_graphics(bibcode):
                 for image in images:
                     thumb_url = image['thumbnail']
                     highr_url = image['highres']
-                    results['widgets'].append('<div class="imageSingle"><div class="image">'+thumb_link % (highr_url,thumb_url.replace('_tb','_lr'))+'</div><div class="footer">'+figure['figure_label']+'</div></div>')
         elif source == 'ADSASS':
             results['header'] = 'Images from the <a href="http://www.adsass.org/" target="_new">ADS All Sky Survey</a>'
             try:
@@ -82,9 +80,8 @@ def get_graphics(bibcode):
                 if 'WWT_url' in figure:
                     WWT_link = '<a href="%s" target="_new">WWT</a>' % figure['WWT_url'].replace('%26','+')
                 image_context = '<a href="%s" target="_new">%s</a>' % (ADSlink,image)
-                results['widgets'].append('<div class="imageSingle"><div class="image">'+image_context+'</div><div class="footer">'+figure['figure_label']+'&nbsp;'+WWT_link+'</div></div>')
                 results['ADSlink'].append(ADS_image_url%(bibcode.replace('&','%26'),figure['page']-1))
-        elif source.upper() == 'ARXIV' and current_app.config['INCLUDE_ARXIV']:
+        elif source.upper() == 'ARXIV' and current_app.config.get('GRAPHICSINCLUDE_ARXIV'):
             results['header'] = 'Images extracted from the arXiv e-print'
             try:
                 display_image = random.choice(display_figure['images'])
@@ -99,7 +96,6 @@ def get_graphics(bibcode):
                     thumb_url = image['thumbnail']
                     highr_url = image['highres']
                     lowrs_url = image['lowres']
-                    results['widgets'].append('<div class="imageSingle"><div class="image">'+thumb_link % (highr_url,highr_url)+'</div></div>')
         elif source.upper() == 'TEST':
             results['pick'] = display_figure
             return results

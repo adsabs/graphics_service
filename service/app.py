@@ -4,7 +4,6 @@ from flask import Flask, g
 from views import blueprint, Graphics
 from flask.ext.restful import Api
 from flask.ext.discoverer import Discoverer
-from client import Client
 from utils.database import db
 
 def _create_blueprint_():
@@ -30,7 +29,6 @@ def create_app(blueprint_only=False):
     app.config.from_pyfile('local_config.py')
   except IOError:
     pass
-  app.client = Client(app.config['CLIENT'])
 
   blueprint = _create_blueprint_()
   api = Api(blueprint)
@@ -48,4 +46,4 @@ def create_app(blueprint_only=False):
 
 if __name__ == "__main__":
   app = create_app()
-  app.run()
+  app.run(debug=True,use_reloader=False)
