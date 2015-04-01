@@ -9,6 +9,7 @@ import simplejson as json
 import random
 from flask import current_app
 from database import db, AlchemyEncoder, GraphicsModel
+from sqlalchemy.orm.exc import NoResultFound
 
 thumb_link = '<a href="%s" target="_new" border=0><img src="%s" width="100px"></a>'
 graph_link = '<a href="graphics" border=0><img src="%s"></a>'
@@ -20,22 +21,21 @@ ADS_image_url = 'http://articles.adsabs.harvard.edu/cgi-bin/nph-iarticle_query?b
 def get_graphics(bibcode):
     # Query graphics database with bibcode supplied
     try:
-        # Data is returned
-        resp = db.session.query(GraphicsModel).filter(GraphicsModel.bibcode==bibcode).one()
-        results = json.loads(json.dumps(resp, cls=AlchemyEncoder))
-        results['query'] = 'OK'
+      resp = db.session.query(GraphicsModel).filter(GraphicsModel.bibcode==bibcode).one()
+      results = json.loads(json.dumps(resp, cls=AlchemyEncoder))
+      results['query'] = 'OK'
+    except NoResultFound:
+      results = {'query':'failed', 'error':'no database entry found for %s' % bibcode}
+    except (ValueError,TypeError),err:
+      # Exception thrown when there is a problem with the JSON handling
+      results = {'query':'failed', 'error': 'JSON problem (%s)' % err}
+      raise
     except Exception, err:
-        # Exception is thrown, either because there is no entry or database
-        # cannot be queried
-        results = {}
-        results['query' ] = 'failed'
-        if 'row' in str(err):
-           # In this case there was no entry for the bibcode given
-           results['error'] = 'no database entry found for %s' % bibcode 
-        else:
-           # In this case the query blew up because of connection problems
-           results['error'] = err
-           raise
+      if 'row' in str(err):
+        results = {'query':'failed', 'error':'no database entry found for %s' % bibcode}
+      else:
+        results = {'query':'failed', 'error':'PostgreSQL problem (%s)' % error}
+
     if results and 'figures' in results:
         if len(results['figures']) == 0:
             # There are cases where an entry exists, but the 'figures'
@@ -102,5 +102,5 @@ def get_graphics(bibcode):
         else:
             results = {}
     if not results:
-        results = {}
+        results = {'query':'failed', 'error':'no database entry found for %s' % bibcode}
     return results
