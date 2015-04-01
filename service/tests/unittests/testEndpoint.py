@@ -10,6 +10,7 @@ import unittest
 import requests
 import app
 import mock
+import json
 
 from utils.database import GraphicsModel
 from datetime import datetime
@@ -75,13 +76,27 @@ class TestDatabaseError(TestCase):
        r = self.client.get(url)
        self.assertTrue(r.status_code == 500)
 
+class TestJSONError(TestCase):
+    def create_app(self):
+        '''Create the wsgi application'''
+        app_ = app.create_app()
+        db.session = mock.Mock()
+        one = db.session.query.return_value.filter.return_value.one
+        one.return_value = 'a'
+        return app_
+    def test_query(self):
+       ''''An exception is returned when something goes wrong with JSON handling'''
+       url = url_for('graphics.graphics',bibcode='9999BBBBBVVVVQPPPPI')
+       r = self.client.get(url)
+       self.assertTrue(r.status_code == 500)
+
 class TestNoDataReturned(TestCase):
     def create_app(self):
         '''Create the wsgi application'''
         app_ = app.create_app()
         db.session = mock.Mock()
         one = db.session.query.return_value.filter.return_value.one
-        one.return_value = Exception("No row found")
+        one.return_value = {'figures':[]}
         return app_
     def test_query(self):
        ''''An exception is returned when no row is found in database'''
@@ -91,4 +106,4 @@ class TestNoDataReturned(TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(verbosity=2)
