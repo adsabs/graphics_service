@@ -18,12 +18,13 @@ class TestConfig(TestCase):
 
   def test_config_values(self):
     '''Check if all required config variables are there'''
-    required = ["GAPHICS_INCLUDE_ARXIV","SQLALCHEMY_BINDS","GRAPHICS_API_TOKEN","DISCOVERER_PUBLISH_ENDPOINT","DISCOVERER_SELF_PUBLISH"]
+    required = ["GAPHICS_INCLUDE_ARXIV","SQLALCHEMY_BINDS","DISCOVERER_PUBLISH_ENDPOINT","DISCOVERER_SELF_PUBLISH"]
 
     missing = [x for x in required if x not in self.app.config.keys()]
     self.assertTrue(len(missing)==0)
     # Check if API has an actual value
-    self.assertTrue(self.app.config.get('GRAPHICS_API_TOKEN',None) != None)
+    if os.path.exists("%s/local_config.py" % PROJECT_HOME):
+      self.assertTrue(self.app.config.get('GRAPHICS_API_TOKEN',None) != None)
 
 if __name__ == '__main__':
   unittest.main()
