@@ -102,8 +102,8 @@ class TestNoDataReturned(TestCase):
        ''''An exception is returned when no row is found in database'''
        url = url_for('graphics.graphics',bibcode='9999BBBBBVVVVQPPPPI')
        r = self.client.get(url)
-       self.assertTrue(r.status_code == 404)
-
+       self.assertTrue(r.status_code == 200)
+       self.assertTrue('Error' in r.json)
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
