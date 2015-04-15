@@ -32,4 +32,4 @@ class Graphics(Resource):
        if results and results['query'] == 'OK':
            return results
        else:
-           return {'msg': 'Unable to get results! (%s)' % results.get('error','NA')}, 404
+           return {'Error': 'Unable to get results!', 'Error Info': results.get('error','NA')}, 200 
