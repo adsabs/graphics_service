@@ -12,15 +12,20 @@ from flask.ext.sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+
 class AlchemyEncoder(json.JSONEncoder):
+
     def default(self, obj):
         if isinstance(obj.__class__, DeclarativeMeta):
             # an SQLAlchemy class
             fields = {}
-            for field in [x for x in dir(obj) if not x.startswith('_') and x != 'metadata']:
+            for field in [x for x in dir(obj)
+                          if not x.startswith('_') and x != 'metadata']:
                 data = obj.__getattribute__(field)
                 try:
-                    json.dumps(data) # this will fail on non-encodable values, like other classes
+                    # this will fail on non-encodable values, like other
+                    # classes
+                    json.dumps(data)
                     fields[field] = data
                 except TypeError:
                     fields[field] = None
@@ -29,13 +34,14 @@ class AlchemyEncoder(json.JSONEncoder):
 
         return json.JSONEncoder.default(self, obj)
 
+
 class GraphicsModel(db.Model):
-  __tablename__='graphics'
-  __bind_key__ ='graphics'
-  id = Column(Integer,primary_key=True)
-  bibcode = Column(String,nullable=False,index=True)
-  doi = Column(String)
-  source = Column(String)
-  eprint = Column(Boolean)
-  figures = Column(postgresql.JSON)
-  modtime = Column(DateTime)
+    __tablename__ = 'graphics'
+    __bind_key__ = 'graphics'
+    id = Column(Integer, primary_key=True)
+    bibcode = Column(String, nullable=False, index=True)
+    doi = Column(String)
+    source = Column(String)
+    eprint = Column(Boolean)
+    figures = Column(postgresql.JSON)
+    modtime = Column(DateTime)
