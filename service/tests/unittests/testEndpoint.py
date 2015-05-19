@@ -1,5 +1,7 @@
-import sys, os
-PROJECT_HOME = os.path.abspath(os.path.join(os.path.dirname(__file__),'../../'))
+import sys
+import os
+PROJECT_HOME = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), '../../'))
 sys.path.append(PROJECT_HOME)
 from flask.ext.testing import TestCase
 from flask import url_for, Flask
@@ -11,24 +13,31 @@ import requests
 import app
 import mock
 import json
-
 from utils.database import GraphicsModel
 from datetime import datetime
 
+
 def get_testdata():
     global figures
-    figures = [{"images": [{"image_id": "fg1", "format": "gif", "thumbnail": "fg1_thumb_url", "highres": "fg1_highres_url"}], "figure_caption": "Figure 1", "figure_label": "Figure 1", "figure_id": "fg1"}]
+    figures = [{"images": [{"image_id": "fg1", "format": "gif",
+                            "thumbnail": "fg1_thumb_url", "highres":
+                            "fg1_highres_url"}],
+                "figure_caption": "Figure 1",
+                "figure_label": "Figure 1",
+                "figure_id": "fg1"}]
     g = GraphicsModel(
-            bibcode = '9999BBBBBVVVVQPPPPI',
-            doi = 'DOI',
-            source = 'TEST',
-            eprint = False,
-            figures = figures,
-            modtime = datetime.now()
-        )
+        bibcode='9999BBBBBVVVVQPPPPI',
+        doi='DOI',
+        source='TEST',
+        eprint=False,
+        figures=figures,
+        modtime=datetime.now()
+    )
     return g
 
+
 class TestExpectedResults(TestCase):
+
     def create_app(self):
         '''Create the wsgi application'''
         app_ = app.create_app()
@@ -44,25 +53,35 @@ class TestExpectedResults(TestCase):
         bc = Column(Boolean)
         jc = Column(postgresql.JSON)
         dc = Column(DateTime)
-        cols_expect = map(type, [ic.type, sc.type, sc.type, sc.type, bc.type, jc.type, dc.type])
-        self.assertEqual([type(c.type) for c in GraphicsModel.__table__.columns], cols_expect)
+        cols_expect = map(
+            type, [ic.type, sc.type, sc.type, sc.type, bc.type,
+                   jc.type, dc.type])
+        self.assertEqual([type(c.type)
+                          for c in GraphicsModel.__table__.columns],
+                         cols_expect)
 
     def test_query_1(self):
         '''Check that session mock behaves the way we set it up'''
-        expected_attribs = ['modtime', 'bibcode', 'source', '_sa_instance_state', 'eprint', 'figures', 'id', 'doi']
-        resp = db.session.query(GraphicsModel).filter(GraphicsModel.bibcode=='9999BBBBBVVVVQPPPPI').one()
+        expected_attribs = ['modtime', 'bibcode', 'source',
+                            '_sa_instance_state', 'eprint',
+                            'figures', 'id', 'doi']
+        resp = db.session.query(GraphicsModel).filter(
+            GraphicsModel.bibcode == '9999BBBBBVVVVQPPPPI').one()
         self.assertEqual(resp.__dict__.keys().sort(), expected_attribs.sort())
 
     def test_query(self):
-        '''Query endpoint with bibcode from stub data should return expected results'''
-        url = url_for('graphics.graphics',bibcode='9999BBBBBVVVVQPPPPI')
+        '''Query endpoint with bibcode from stub data should
+           return expected results'''
+        url = url_for('graphics.graphics', bibcode='9999BBBBBVVVVQPPPPI')
         r = self.client.get(url)
         self.assertTrue(r.status_code == 200)
         self.assertTrue(r.json.get('figures') == figures)
         self.assertTrue(r.json.get('bibcode') == '9999BBBBBVVVVQPPPPI')
         self.assertTrue(r.json.get('pick')['figure_label'] == 'Figure 1')
 
+
 class TestDatabaseError(TestCase):
+
     def create_app(self):
         '''Create the wsgi application'''
         app_ = app.create_app()
@@ -70,13 +89,17 @@ class TestDatabaseError(TestCase):
         one = db.session.query.return_value.filter.return_value.one
         one.return_value = Exception()
         return app_
+
     def test_query(self):
-       ''''An exception is returned representing the absence of a database connection'''
-       url = url_for('graphics.graphics',bibcode='9999BBBBBVVVVQPPPPI')
-       r = self.client.get(url)
-       self.assertTrue(r.status_code == 500)
+        ''''An exception is returned representing the absence of
+            a database connection'''
+        url = url_for('graphics.graphics', bibcode='9999BBBBBVVVVQPPPPI')
+        r = self.client.get(url)
+        self.assertTrue(r.status_code == 500)
+
 
 class TestJSONError(TestCase):
+
     def create_app(self):
         '''Create the wsgi application'''
         app_ = app.create_app()
@@ -84,26 +107,31 @@ class TestJSONError(TestCase):
         one = db.session.query.return_value.filter.return_value.one
         one.return_value = 'a'
         return app_
+
     def test_query(self):
-       ''''An exception is returned when something goes wrong with JSON handling'''
-       url = url_for('graphics.graphics',bibcode='9999BBBBBVVVVQPPPPI')
-       r = self.client.get(url)
-       self.assertTrue(r.status_code == 500)
+        ''''An exception is returned when something goes wrong
+            with JSON handling'''
+        url = url_for('graphics.graphics', bibcode='9999BBBBBVVVVQPPPPI')
+        r = self.client.get(url)
+        self.assertTrue(r.status_code == 500)
+
 
 class TestNoDataReturned(TestCase):
+
     def create_app(self):
         '''Create the wsgi application'''
         app_ = app.create_app()
         db.session = mock.Mock()
         one = db.session.query.return_value.filter.return_value.one
-        one.return_value = {'figures':[]}
+        one.return_value = {'figures': []}
         return app_
+
     def test_query(self):
-       ''''An exception is returned when no row is found in database'''
-       url = url_for('graphics.graphics',bibcode='9999BBBBBVVVVQPPPPI')
-       r = self.client.get(url)
-       self.assertTrue(r.status_code == 200)
-       self.assertTrue('Error' in r.json)
+        ''''An exception is returned when no row is found in database'''
+        url = url_for('graphics.graphics', bibcode='9999BBBBBVVVVQPPPPI')
+        r = self.client.get(url)
+        self.assertTrue(r.status_code == 200)
+        self.assertTrue('Error' in r.json)
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
