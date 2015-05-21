@@ -12,3 +12,5 @@ simplejson>=3.3.0
 requests
 mock
 coveralls
+-e
+git+https://github.com/adsabs/flask-consulate@8d7e60122cbc73693ac37a5468b9be78bea774a1#egg=flask-consulate

@@ -5,7 +5,7 @@ PROJECT_HOME = os.path.abspath(
 sys.path.append(PROJECT_HOME)
 from flask.ext.testing import TestCase
 from flask import url_for, Flask
-from utils.database import db
+from utils.models import db
 from sqlalchemy import Column, Integer, String, DateTime, Boolean
 from sqlalchemy.dialects import postgresql
 import unittest
@@ -13,7 +13,7 @@ import requests
 import app
 import mock
 import json
-from utils.database import GraphicsModel
+from utils.models import GraphicsModel
 from datetime import datetime
 
 
@@ -72,7 +72,7 @@ class TestExpectedResults(TestCase):
     def test_query(self):
         '''Query endpoint with bibcode from stub data should
            return expected results'''
-        url = url_for('graphics.graphics', bibcode='9999BBBBBVVVVQPPPPI')
+        url = url_for('graphics', bibcode='9999BBBBBVVVVQPPPPI')
         r = self.client.get(url)
         self.assertTrue(r.status_code == 200)
         self.assertTrue(r.json.get('figures') == figures)
@@ -93,7 +93,7 @@ class TestDatabaseError(TestCase):
     def test_query(self):
         ''''An exception is returned representing the absence of
             a database connection'''
-        url = url_for('graphics.graphics', bibcode='9999BBBBBVVVVQPPPPI')
+        url = url_for('graphics', bibcode='9999BBBBBVVVVQPPPPI')
         r = self.client.get(url)
         self.assertTrue(r.status_code == 500)
 
@@ -111,7 +111,7 @@ class TestJSONError(TestCase):
     def test_query(self):
         ''''An exception is returned when something goes wrong
             with JSON handling'''
-        url = url_for('graphics.graphics', bibcode='9999BBBBBVVVVQPPPPI')
+        url = url_for('graphics', bibcode='9999BBBBBVVVVQPPPPI')
         r = self.client.get(url)
         self.assertTrue(r.status_code == 500)
 
@@ -128,7 +128,7 @@ class TestNoDataReturned(TestCase):
 
     def test_query(self):
         ''''An exception is returned when no row is found in database'''
-        url = url_for('graphics.graphics', bibcode='9999BBBBBVVVVQPPPPI')
+        url = url_for('graphics', bibcode='9999BBBBBVVVVQPPPPI')
         r = self.client.get(url)
         self.assertTrue(r.status_code == 200)
         self.assertTrue('Error' in r.json)

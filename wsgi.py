@@ -9,9 +9,9 @@
 from werkzeug.serving import run_simple
 from werkzeug.wsgi import DispatcherMiddleware
 
-from service import app as graphics
+from service import app
 
-application = DispatcherMiddleware(graphics.create_app(), mounts={})
+application = app.create_app()
 
 if __name__ == "__main__":
     run_simple('0.0.0.0', 4000, application, use_reloader=False,
