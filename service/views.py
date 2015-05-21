@@ -1,23 +1,7 @@
-from flask import current_app, Blueprint, request
+from flask import current_app
 from flask.ext.restful import Resource
 from flask.ext.discoverer import advertise
-import time
-import inspect
-import sys
-import config
-from client import Client
-
 from utils.graphics import get_graphics
-
-if not hasattr(config, 'GRAPHICS_API_TOKEN'):
-    config.GRAPHICS_API_TOKEN = None
-client = Client({'TOKEN': config.GRAPHICS_API_TOKEN})
-
-blueprint = Blueprint(
-    'graphics',
-    __name__,
-    static_folder=None,
-)
 
 
 class Graphics(Resource):

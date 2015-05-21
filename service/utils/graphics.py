@@ -8,7 +8,7 @@ import os
 import simplejson as json
 import random
 from flask import current_app
-from database import db, AlchemyEncoder, GraphicsModel
+from models import db, AlchemyEncoder, GraphicsModel
 from sqlalchemy.orm.exc import NoResultFound
 
 thumb_link = '<a href="%s" target="_new" border=0>' + \
