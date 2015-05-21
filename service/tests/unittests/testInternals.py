@@ -23,7 +23,7 @@ class TestConfig(TestCase):
 
     def test_config_values(self):
         '''Check if all required config variables are there'''
-        required = ["GAPHICS_INCLUDE_ARXIV", "SQLALCHEMY_BINDS",
+        required = ["GRAPHICS_INCLUDE_ARXIV", "SQLALCHEMY_BINDS",
                     "DISCOVERER_PUBLISH_ENDPOINT", "DISCOVERER_SELF_PUBLISH"]
 
         missing = [x for x in required if x not in self.app.config.keys()]
