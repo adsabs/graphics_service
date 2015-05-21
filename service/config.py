@@ -1,5 +1,5 @@
 GRAPHICS_SECRET_KEY = 'this should be changed'
-GAPHICS_INCLUDE_ARXIV = False
+GRAPHICS_INCLUDE_ARXIV = False
 SQLALCHEMY_BINDS = {}
 # This section configures this application to act as a client, for example
 # to query solr via adsws
