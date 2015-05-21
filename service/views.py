@@ -1,7 +1,7 @@
 from flask import current_app
 from flask.ext.restful import Resource
 from flask.ext.discoverer import advertise
-from utils.graphics import get_graphics
+from graphics import get_graphics
 
 
 class Graphics(Resource):

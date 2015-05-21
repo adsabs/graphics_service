@@ -2,7 +2,7 @@ from flask import Flask
 from views import Graphics
 from flask.ext.restful import Api
 from flask.ext.discoverer import Discoverer
-from utils.models import db
+from models import db
 from flask.ext.consulate import Consul, ConsulConnectionError
 
 

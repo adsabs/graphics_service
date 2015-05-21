@@ -5,7 +5,7 @@ PROJECT_HOME = os.path.abspath(
 sys.path.append(PROJECT_HOME)
 from flask.ext.testing import TestCase
 from flask import url_for, Flask
-from utils.models import db
+from models import db, GraphicsModel
 from sqlalchemy import Column, Integer, String, DateTime, Boolean
 from sqlalchemy.dialects import postgresql
 import unittest
@@ -13,7 +13,6 @@ import requests
 import app
 import mock
 import json
-from utils.models import GraphicsModel
 from datetime import datetime
 
 
