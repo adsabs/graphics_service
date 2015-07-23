@@ -1,0 +1,982 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE article PUBLIC "-//NLM//DTD Journal Publishing DTD v2.3 20070202//EN" "http://live.ej.iop.org/dtd/aas/journalpublishing.dtd">
+<article xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink" article-type="research-article">
+<front>
+<journal-meta>
+<journal-id journal-id-type="publisher-id">apjl</journal-id>
+<journal-title>The Astrophysical Journal Letters</journal-title>
+<abbrev-journal-title abbrev-type="AAS">ApJL</abbrev-journal-title>
+<abbrev-journal-title abbrev-type="publisher">Astrophys. J. Lett.</abbrev-journal-title>
+<issn pub-type="ppub">2041-8205</issn>
+<issn pub-type="epub">2041-8205</issn>
+<publisher>
+<publisher-name>The American Astronomical Society</publisher-name>
+</publisher>
+</journal-meta>
+<article-meta>
+<article-id pub-id-type="publisher-id">apjl488205</article-id>
+<article-id pub-id-type="coden">ASJOAB</article-id>
+<article-id pub-id-type="doi">10.1088/2041-8205/778/2/L42</article-id>
+<article-id pub-id-type="manuscript">488205</article-id>
+<article-id pub-id-type="other">LET30789</article-id>
+<article-categories>
+<subj-group subj-group-type="article-type">
+<subject>Letters</subject>
+</subj-group>
+</article-categories>
+<title-group>
+<article-title>DETECTABILITY OF FREE FLOATING PLANETS IN OPEN CLUSTERS WITH THE <italic>JAMES WEBB SPACE TELESCOPE</italic></article-title>
+<alt-title alt-title-type="lowercased">Detectability of free floating planets in open clusters with the <italic>James Webb Space Telescope</italic></alt-title>
+<alt-title alt-title-type="short-author">Pacucci, Ferrara, &amp; D&rsquo;Onghia</alt-title>
+<alt-title alt-title-type="toc">Detectability of Free Floating Planets in Open Clusters with the <italic>James Webb Space Telescope</italic></alt-title>
+<alt-title alt-title-type="toc-author">Fabio Pacucci, Andrea Ferrara, and Elena D&rsquo;Onghia</alt-title>
+<alt-title alt-title-type="ej">DETECTABILITY OF FREE FLOATING PLANETS IN OPEN CLUSTERS WITH THE JAMES WEBB SPACE TELESCOPE</alt-title>
+</title-group>
+<contrib-group content-type="all">
+<contrib contrib-type="author">
+<name><surname>Pacucci</surname>
+<given-names>Fabio</given-names></name>
+<xref ref-type="aff" rid="apjl488205af1">1</xref></contrib>
+<contrib contrib-type="author">
+<name><surname>Ferrara</surname>
+<given-names>Andrea</given-names></name>
+<xref ref-type="aff" rid="apjl488205af1">1</xref></contrib>
+<contrib contrib-type="author">
+<name><surname>D&rsquo;Onghia</surname>
+<given-names>Elena</given-names></name>
+<xref ref-type="aff" rid="apjl488205af2">2</xref>
+<xref ref-type="fn" rid="apjl488205afn1">3</xref></contrib>
+<aff id="apjl488205af1"><label>1</label>Scuola Normale Superiore, Piazza dei Cavalieri 7, I-56126 Pisa, Italy</aff>
+<aff id="apjl488205af2"><label>2</label>University of Wisconsin, 475 Charter St., Madison, WI 53706, USA</aff>
+</contrib-group>
+<author-notes>
+<fn id="apjl488205afn1"><label>3</label><p>Alfred P. Sloan Fellow.</p></fn>
+</author-notes>
+<pub-date pub-type="ppub"><day>1</day><month>12</month><year>2013</year></pub-date>
+<pub-date pub-type="epub"><day>18</day><month>11</month><year>2013</year></pub-date>
+<volume>778</volume>
+<issue>2</issue>
+<elocation-id content-type="artnum">L42</elocation-id>
+<supplementary-material><label>color figures</label></supplementary-material>
+<history>
+<date date-type="received"><day>13</day><month>6</month><year>2013</year></date>
+<date date-type="accepted"><day>4</day><month>11</month><year>2013</year></date>
+</history>
+<permissions>
+<copyright-statement>&copy; 2013. The American Astronomical Society. All rights reserved.</copyright-statement>
+<copyright-year>2013</copyright-year>
+</permissions>
+<self-uri xlink:href="http://stacks.iop.org/ApJL/778/L42"/>
+<abstract><title>ABSTRACT</title>
+<p>Recent observations have shown the presence of extra-solar planets in Galactic open stellar clusters, such as in Praesepe (M44). These systems provide a favorable environment for planetary formation due to the high heavy-element content exhibited by the majority of their population. The large stellar density, and corresponding high close-encounter event rate, may induce strong perturbations of planetary orbits with large semimajor axes. Here we present a set of <italic>N</italic>-body simulations implementing a novel scheme to treat the tidal effects of external stellar perturbers on planetary orbit eccentricity and inclination. By simulating five nearby open clusters, we determine the rate of occurrence of bodies extracted from their parent stellar system by quasi-impulsive tidal interactions. We find that the specific free-floating planet production rate <inline-formula><tex-math><?CDATA $\dot{N}_o$?></tex-math><inline-graphic xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="apjl488205ieqn1.gif"/></inline-formula> (total number of free-floating planets per unit of time, normalized by the total number of stars), is proportional to the stellar density &rho;<sub>&sstarf;</sub> of the cluster: <inline-formula><tex-math><?CDATA $\dot{N}_o = \alpha \rho _\star$?></tex-math><inline-graphic xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="apjl488205ieqn2.gif"/></inline-formula>, with &alpha; &equals; (23 &plusmn; 5) &times; 10<sup>&minus;6</sup>&thinsp;pc<sup>3</sup>&thinsp;Myr<sup>&minus;1</sup>. For the Pleiades (M45), we predict that &sim;26&percnt; of stars should have lost their planets. This raises the exciting possibility of directly observing these wandering planets with the <italic>James Webb Space Telescope</italic> in the near-infrared band. Assuming a surface temperature for the planet of &sim;500&nbsp;K, a free-floating planet of Jupiter size inside the Pleiades would have a specific flux of <italic>F</italic><sub>&nu;</sub> (4.4&thinsp;&mu;m) &ap;4 &times; 10<sup>2</sup>&nbsp;nJy, which would lead to a very clear detection (S&sol;N &sim; 100) in only one hour of integration.</p></abstract>
+<kwd-group kwd-group-type="AAS">
+<kwd>open clusters and associations: general</kwd>
+<kwd>stars: kinematics and dynamics</kwd>
+</kwd-group>
+<counts>
+<page-count count="6"/>
+</counts>
+<custom-meta-wrap>
+<custom-meta><meta-name>ccc</meta-name><meta-value>2041-8205/13/020042+06&#x0024;30.00</meta-value></custom-meta>
+<custom-meta><meta-name>printed</meta-name><meta-value>Printed in the U.S.A.</meta-value></custom-meta>
+</custom-meta-wrap>
+</article-meta>
+</front>
+<body>
+<sec id="apjl488205s1"><label>1.</label><title>INTRODUCTION</title>
+<p>The first detection of an extra-solar planet orbiting a Sun-like star in a dense stellar environment dates back to 2012, when a NASA-funded team discovered Pr0201b and Pr0211b inside the Praesepe open cluster (Quinn et al. <xref ref-type="bibr" rid="apjl488205r37">2012</xref>). This cluster contains more than 1000 stars, and has a core radius of &ap;1.3&nbsp;pc and a distance from the Earth of &ap;600&nbsp;pc (Kraus &amp; Hillenbrand <xref ref-type="bibr" rid="apjl488205r23">2007</xref>). The newly discovered planet belongs to the type of extra-solar planets termed Hot Jupiters (Mayor &amp; Queloz <xref ref-type="bibr" rid="apjl488205r28">1995</xref>; Charbonneau et al. <xref ref-type="bibr" rid="apjl488205r11">2000</xref>), i.e., massive gas giants that, unlike Jupiter, orbit very close to their parent stars. Hot Jupiters are the easiest planets to detect with radial velocity or transit methods, due to their high mass and small semimajor axis (Moulds et al. <xref ref-type="bibr" rid="apjl488205r31">2013</xref>). However, the origin of this extra-solar planet population is still uncertain. Several studies suggested that it is likely to result from a planetary migration process that dramatically decreases the semimajor axis of giant planets formed far away from the star, beyond the so-called ice line (Lin &amp; Pringle <xref ref-type="bibr" rid="apjl488205r24">1976</xref>; Goldreich &amp; Tremaine <xref ref-type="bibr" rid="apjl488205r21">1980</xref>; Fabrycky &amp; Tremaine <xref ref-type="bibr" rid="apjl488205r19">2007</xref>).</p>
+<p>Given the first confirmed planet detection in the Praesepe open cluster, it is likely that several other planets are also present in high-density environments. In particular, a study by Meibom et al. (<xref ref-type="bibr" rid="apjl488205r29">2013</xref>) shows that the frequency of planets inside clusters is the same as in the field. Indeed, the high metallicity found in most of the open clusters facilitates the process of planetary formation (Fischer &amp; Valenti <xref ref-type="bibr" rid="apjl488205r20">2005</xref>; Chatterjee et al. <xref ref-type="bibr" rid="apjl488205r12">2012</xref>) and their relatively high stellar density, about 500&nbsp;times larger than in the solar neighborhood (Nilakshi et al. <xref ref-type="bibr" rid="apjl488205r34">2002</xref>), makes stellar fly-bys a very likely process. As a result, close encounters between stars in an open cluster are common and may dramatically affect the orbits of planets with large semimajor axes (Adams et al. <xref ref-type="bibr" rid="apjl488205r3">2006</xref>). As planetary eccentricities grow, they may get captured into closer orbits, becoming Hot Jupiters; see, e.g., Wu &amp; Lithwick (<xref ref-type="bibr" rid="apjl488205r44">2011</xref>).</p>
+<p>Stellar fly-bys and their effects on planets have recently been studied in various contexts. In the solar system, for instance, it is thought that the orbit of Sedna is a consequence of stellar fly-bys (Brasser et al. <xref ref-type="bibr" rid="apjl488205r9">2012</xref>), and recently Adams (<xref ref-type="bibr" rid="apjl488205r2">2010</xref>) discussed the truncation of the Kuiper Belt by fly-bys. In addition, stellar fly-bys have also been investigated in more recent works as a cause of planetary ejections (Veras &amp; Raymond <xref ref-type="bibr" rid="apjl488205r41">2012</xref>; de Juan Ovelar et al. <xref ref-type="bibr" rid="apjl488205r14">2012</xref>; Craig &amp; Krumholz <xref ref-type="bibr" rid="apjl488205r13">2013</xref>; Parker &amp; Quanz <xref ref-type="bibr" rid="apjl488205r35">2012</xref>). Most of the theories of planet formation suggest that planets should reside in resonances (Masset &amp; Snellgrove <xref ref-type="bibr" rid="apjl488205r27">2001</xref>), but these are found to be rare (Wright et al. <xref ref-type="bibr" rid="apjl488205r43">2011b</xref>). One possibility is that stellar fly-by perturbations lead to the break-up of multiresonant states (Morbidelli et al. <xref ref-type="bibr" rid="apjl488205r30">2007</xref>; Batygin &amp; Brown <xref ref-type="bibr" rid="apjl488205r4">2010</xref>), triggering large-scale instabilities that could explain the random <italic>a</italic>-<italic>e</italic> distribution of exoplanets. Additional complications arise from the fact that solar systems can eject planets on their own through instabilities (Rasio &amp; Ford <xref ref-type="bibr" rid="apjl488205r38">1996</xref>; Nesvorn&yacute; <xref ref-type="bibr" rid="apjl488205r32">2011</xref>; Batygin et al. <xref ref-type="bibr" rid="apjl488205r5">2012</xref>; Nesvorn&yacute; &amp; Morbidelli <xref ref-type="bibr" rid="apjl488205r33">2012</xref>; Boley et al. <xref ref-type="bibr" rid="apjl488205r7">2012</xref>).</p>
+<p>In the following we present the results of numerical simulations following the impulsive perturbation of planetary orbits with orbital distances from the parent star in the range (5&ndash;60)&thinsp;AU, roughly from the orbital distance of Jupiter to the farthest extra-solar planets with a clear semimajor axis detection discovered so far (see Wright et al. <xref ref-type="bibr" rid="apjl488205r42">2011a</xref>
+<xref ref-type="fn" rid="apjl488205fn1"><sup>4</sup></xref><fn id="apjl488205fn1"><label>4</label><p><ext-link ext-link-type="url">http://exoplanets.org</ext-link></p></fn>). Several planets with much larger semimajor axes have been discovered (Luhman et al. <xref ref-type="bibr" rid="apjl488205r25">2011</xref>), but the associated uncertainty is also much larger. Our aim is to show that a sizable fraction of planets within this distance range are ejected from their planetary systems by tidal interactions with nearby stars.</p></sec>
+<sec id="apjl488205s2"><label>2.</label><title>METHODOLOGY</title>
+<p>We have developed a numerical code to accurately describe the tidal effects of a gravitational encounter between a Jupiter-like planet orbiting a central star, and a perturbing star moving on a straight line or parabolic trajectory (see D&rsquo;Onghia et al. <xref ref-type="bibr" rid="apjl488205r17">2010</xref> for the geometry of the problem). The close encounter has been studied in a four-parameter space, namely (1) the distance between the parent star and the planet, <italic>d<sub>p</sub></italic>; (2) the interstellar distance at pericenter, <italic>D</italic>; (3) the inclination between the perturber and planet orbital planes, <italic>i</italic>; and (4) the relative velocity of the perturber, <italic>v<sub>rel</sub></italic>.</p>
+<p>Each parameter interval has been sampled with five points, for a total of 625 different values. For any given point in the parameter space, the resulting variations of the orbital eccentricity and inclination are saved in the &ldquo;interaction matrix.&rdquo; This matrix is used as a sub-grid model for a <italic>N</italic>-body simulation of an open cluster. The use of a sub-grid approach presents some limitations with respect to a fully self-consistent model of 2<italic>N</italic> particles. Nonetheless, the sub-grid model is less computationally expensive than other methods, allowing us to build better statistics on the escaping planets.</p>
+<sec id="apjl488205s2-1"><label>2.1.</label><title>Building the Interaction Matrix</title>
+<p>Table <xref ref-type="table" rid="apjl488205t1">1</xref> summarizes the values of the interaction parameters.</p>
+<table-wrap id="apjl488205t1" content-type="column"><label>Table 1</label>
+<caption><p>Interaction Parameters</p></caption>
+<table width="50%">
+<colgroup>
+<col align="left"/>
+<col align="char" char="."/>
+<col align="center"/>
+<col align="center"/>
+</colgroup>
+<thead>
+<tr><th align="left"><italic>D</italic></th>
+<th align="center"><italic>v<sub>rel</sub></italic></th>
+<th align="center"><italic>i</italic></th>
+<th align="center"><italic>d<sub>p</sub></italic></th></tr>
+<tr><th align="left">(AU)</th>
+<th align="center">(AU&sol;yr)</th>
+<th align="center">(&deg;)</th>
+<th align="center">(AU)</th></tr>
+</thead>
+<tbody><tr><td>30</td>
+<td>0.01</td>
+<td>0</td>
+<td>5</td></tr>
+<tr><td colspan="4"><hr/></td></tr>
+<tr><td>100</td>
+<td>0.05</td>
+<td>10</td>
+<td>15</td></tr>
+<tr><td colspan="4"><hr/></td></tr>
+<tr><td>1000</td>
+<td>0.1</td>
+<td>30</td>
+<td>30</td></tr>
+<tr><td colspan="4"><hr/></td></tr>
+<tr><td>10000</td>
+<td>0.5</td>
+<td>45</td>
+<td>45</td></tr>
+<tr><td colspan="4"><hr/></td></tr>
+<tr><td>100000</td>
+<td>1.0</td>
+<td>60</td>
+<td>60</td></tr></tbody></table>
+<graphic xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="apjl488205t1_tb.gif"/>
+<graphic alternate-form-of="apjl488205t1" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="apjl488205t1_lr.gif"><caption><p>Typeset image</p></caption></graphic></table-wrap>
+<p>A gravitational encounter between two stars yields a modification of the planetary orbit, caused by an energy transfer between the perturbing star and the planet. The interaction matrix provides information regarding the values of &Delta;<italic>e</italic> and &Delta;<italic>i</italic> for all the evaluation points.</p>
+<p>Denoting by <italic>M</italic> the mass of both stars and by <italic>m</italic> the mass of the planet, we fix the system of reference on the parent star and suppose that the perturber follows a straight line trajectory. The parabolic trajectory case has also been implemented as in D&rsquo;Onghia et al. (<xref ref-type="bibr" rid="apjl488205r17">2010</xref>), but the total number of free-floating planets differs in the two cases by less than 1.5&percnt; for all the five clusters. The initial orbital plane of the planet coincides with the <italic>x</italic> &minus; <italic>y</italic> plane, with the <italic>x</italic> axis pointing in the direction of the pericenter. In this reference frame, the force acting on the planet can be decomposed into the centripetal force exerted from the parent star and the tidal force on the planet, caused by the passage of the perturber. The equations of motion are solved via a Runge&ndash;Kutta fourth-order method. The orbital eccentricity and the inclination are evaluated during the integration with the following expressions:
+<disp-formula id="apjl488205fd1"><label>1</label><tex-math><?CDATA
+\begin{equation}
+i = \arctan \left(\frac{z}{\sqrt{x^2+y^2}} \right)
+\end{equation}
+?></tex-math><graphic xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="apjl488205fd1.gif"/></disp-formula>
+<disp-formula id="apjl488205fd2"><label>2</label><tex-math><?CDATA
+\begin{equation}
+e = \sqrt{\left(\frac{1+2\epsilon {\lambda ^2}}{\mu ^2} \right)}
+\end{equation}
+?></tex-math><graphic xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="apjl488205fd2.gif"/></disp-formula>where &epsi; &equals; <italic>E</italic>&sol;<italic>m</italic> is the specific orbital energy, &lambda; &equals; <italic>L</italic>&sol;<italic>m</italic> is the specific angular momentum and &mu; &equals; <italic>G</italic>(<italic>M</italic> &plus; <italic>m</italic>). The parent star is displaced at the origin of the reference frame and remains at rest during the entire evolution of the system. A single planet is assigned to each star and is displaced on a circular orbit at a distance specified by the interaction matrix. The perturbing star has the following initial conditions for its position:
+<disp-formula id="apjl488205fd3"><label>3</label><tex-math><?CDATA
+\begin{equation}
+[x, y, z] = [D \cos (i), y_{\rm shift}, D \sin (i)].
+\end{equation}
+?></tex-math><graphic xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="apjl488205fd3.gif"/></disp-formula>The value of <italic>y</italic><sub>shift</sub> is calculated assuming that the perturber reaches the pericenter at half of the integration time <italic>t</italic><sub>end</sub>. We choose to integrate up to a time when the ratio between the magnitude of the perturber-planet force and the magnitude of the parent star-planet force is equal to a constant, <italic>T</italic><sub>int</sub>:
+<disp-formula id="apjl488205fd4"><label>4</label><tex-math><?CDATA
+\begin{equation}
+t_{\rm end}=\frac{1}{v_0}\times \sqrt{ \frac{M d_p^2}{mT_{\rm int}}-(D-d_p)^2 }.
+\end{equation}
+?></tex-math><graphic xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="apjl488205fd4.gif"/></disp-formula>The time evolution (for a single point in the parameter space) yields the total variations in eccentricity and inclination.</p></sec>
+<sec id="apjl488205s2-2"><label>2.2.</label><title>The Open Cluster Simulation</title>
+<p>The code NBODY6 (Aarseth <xref ref-type="bibr" rid="apjl488205r1">1999</xref>) has been modified, with the addition of a separate routine to manage the planetary configurations, which is called once at each time step. A simulation of <italic>N</italic><sub>stars</sub> stars has been initialized with a Plummer steady-state distribution (Ernst et al. <xref ref-type="bibr" rid="apjl488205r18">2011</xref>) in the phase-space. All these objects are one-solar-mass stars, without any stellar evolution, and the cluster is assumed to be isolated in space. This physical system has been simulated up to the age &tau; of the stellar cluster. Our simple model consists of only single stars, although the binary star fractions in open clusters are observed to be high. This is a limitation of our model since the encounters with binary stars would likely be quite common, but we do believe that our simple model provides a robust lower limit on the number of free-floating planets in these high-density stellar environments.</p>
+<p>The choice of the Plummer model instead of more accurate models (e.g., the King models), is justified by the fact that, unlike globular clusters, open clusters are not completely relaxed objects, so the difference between the two models is not significant. The cluster is subject to natural evaporation with time due to high-speed encounters which eject stars from the cluster. As a consequence, the number of interacting stars is also variable with time.</p>
+<p>Most of the empirical radial distributions of exoplanets found in the literature are related to inner planets, with a semimajor axis smaller than a few AUs (see, e.g., Bovaird &amp; Lineweaver <xref ref-type="bibr" rid="apjl488205r8">2013</xref>). Unfortunately, planets in exactly the range we are primarily interested in (&sim; 10&thinsp;AU) are the most difficult to detect. Given this observational bias and focusing on the range (5&ndash;60)&thinsp;AU of the semimajor axis, it is possible to fit the observed distribution of planets (retrieved from the database exoplanets.org) with an exponential decay function, namely <italic>N</italic>(<italic>r</italic>) &equals; <italic>A</italic> &times; <italic>e</italic><sup>(&minus; <italic>r</italic>&sol;<italic>a</italic>)</sup>, where <italic>A</italic> is a normalization constant, <italic>a</italic> is the <italic>e</italic>-folding length, and <italic>N</italic>(<italic>r</italic>) is the number of planets with a semi-major axis distance of <italic>r</italic> from the central star. The initial distribution of eccentricities is flat, with <italic>e</italic><sub>0</sub> &equals; 0.042.</p>
+<p>Every gravitational encounter between a pair of stars causes a tidally-driven modification of the planetary orbit of their two planets. For every star in the simulation, the routine loops over all the other stars and computes <italic>D</italic>, <italic>i</italic> and <italic>v<sub>rel</sub></italic>, while <italic>d<sub>p</sub></italic> has already been assigned. The corresponding variations of the planetary inclination and eccentricities are calculated by interpolation from the sub-grid model and applied only when the interstellar distance calculated between the pair of stars has increased with respect to the same quantity calculated at the last time step. This approximation is supported by the fact that the variations of eccentricities and inclinations in the tested encounters are very focused around the time of pericenter. The accuracy in the determination of the pericenter is related to the magnitude of the time step used by NBODY6. If the pericenter falls between two time steps, the values calculated from the interaction matrix for the orbital modifications are always underestimated. A partial solution for this problem is to increase the values of &Delta;<italic>e</italic> and &Delta;<italic>i</italic> by a fraction of their values, which is proportional to the following quantity:
+<disp-formula id="apjl488205fd5"><label>5</label><tex-math><?CDATA
+\begin{equation}
+\frac{Rv_{\rm rel}\Delta {T}}{2D}
+\end{equation}
+?></tex-math><graphic xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="apjl488205fd5.gif"/></disp-formula>where &Delta;<italic>T</italic> is the numerical time step (when it goes to zero, the correction vanishes) and <italic>R</italic> is a random number with a uniform probability between 0 and 1, which expresses our lack of knowledge of the real position of the pericenter. We suppose that the orbit of each planet remains circular throughout the simulation. First, we assumed that the radius remains constant: this situation is physically unrealistic, but offers a very secure lower-limit for the number of free-floating planets. Then, we assumed that the radius is modified proportionally to the eccentricity, with the simple scaling law: <italic>d</italic><sub>new</sub> &sim; <italic>d</italic><sub>old</sub> &times; (1 &plus; <italic>e</italic>). In this second case, the total number of free-floating planets increases by roughly 9&percnt;.</p>
+<p>Several checks on the overall consistency of the simulation have been performed, such as one concerning the effect of the mean field, i.e., the cumulative gravitational effects of the stars that are very far from the star under investigation. Its effect on the orbital parameters of a planet is negligible when compared to the gravitational effects of a strong encounter. We perform a fit of the ever-increasing eccentricity of the planet before a strong encounter, and extrapolate the fit up to the final time of the simulation, noting that the corresponding variation of the eccentricity (&Delta;<italic>e</italic> &sim; 10<sup>&minus;4</sup>) is negligible for our purposes. For the very same reason, the <italic>N</italic>-body encounters, with <italic>N</italic> &gt; 2, also have negligible effects on the extraction rate of the planets.</p>
+<p>If the total energy of a planet becomes positive, it escapes from its planetary system. Such a free-floating planet is treated as a separate particle, with a velocity magnitude equal to the escape velocity and random direction. Wandering planets interact with all the other stars, but not with other wandering planets and their dynamics is followed by another routine added to NBODY6. If a free-floating planet approaches another star within a distance of 250&nbsp;AU, its total energy, <italic>E</italic>, with respect to that star is computed and, if negative, the planet is considered as re-captured and is eliminated from the list of free-floating planets (Perets &amp; Kouwenhoven <xref ref-type="bibr" rid="apjl488205r36">2012</xref>).</p></sec></sec>
+<sec id="apjl488205s3"><label>3.</label><title>RESULTS</title>
+<p>A summary of our results for five different galactic open clusters (NGC&nbsp;188, NGC&nbsp;6530, M16, M44, M45) is shown in Figure <xref ref-type="fig" rid="apjl488205f1">1</xref>, where we plot the specific free-floating planet production rate (total number of free-floating planets per unit of time, normalized by the total number of stars) as a function of the central stellar density of the open cluster.</p>
+<fig id="apjl488205f1" position="float" fig-type="color"><label>Figure 1.</label>
+<caption><p>Specific free-floating planet production rate as a function of the open cluster central stellar density, for five different galactic open clusters.</p></caption><graphic id="apjl488205f1_eps" content-type="print" alt-version="yes" xlink:href="apjl488205f1_pr.eps"/>
+<graphic id="apjl488205f1_tb" content-type="thumb" alt-version="yes" xlink:href="apjl488205f1_tb.jpg"/>
+<graphic id="apjl488205f1_lr" content-type="low" alt-version="yes" xlink:href="apjl488205f1_lr.jpg"/>
+<graphic id="apjl488205f1_hr" content-type="high" alt-version="yes" xlink:href="apjl488205f1_hr.jpg"/>
+<graphic id="apjl488205f1_au" content-type="author" xlink:href="apjl488205f1_au.ps"/></fig>
+<p>For our simulations, we have used the parameters shown in Table <xref ref-type="table" rid="apjl488205t2">2</xref> for the five galactic open stellar clusters.</p>
+<table-wrap id="apjl488205t2" content-type="column"><label>Table 2</label>
+<caption><p>Open Cluster Data</p></caption>
+<table width="50%">
+<colgroup>
+<col align="left"/>
+<col align="center"/>
+<col align="center"/>
+<col align="center"/>
+</colgroup>
+<thead>
+<tr><th align="left" rowspan="2">Open Cluster</th>
+<th align="center" rowspan="2">Number of Stars</th>
+<th align="center">Core Radius</th>
+<th align="center">Age</th></tr>
+<tr><th align="center">(pc)</th>
+<th align="center">(Myr)</th></tr>
+</thead>
+<tbody><tr><td>M44</td>
+<td>1391</td>
+<td>1.3</td>
+<td>700</td></tr>
+<tr><td colspan="4"><hr/></td></tr>
+<tr><td>M45</td>
+<td>3151</td>
+<td>1.4</td>
+<td>100</td></tr>
+<tr><td colspan="4"><hr/></td></tr>
+<tr><td>M16</td>
+<td>1560</td>
+<td>1.4</td>
+<td>2.5</td></tr>
+<tr><td colspan="4"><hr/></td></tr>
+<tr><td>NGC&nbsp;6530</td>
+<td>365</td>
+<td>1.4</td>
+<td>2</td></tr>
+<tr><td colspan="4"><hr/></td></tr>
+<tr><td>NGC&nbsp;188</td>
+<td>5388</td>
+<td>2.9</td>
+<td>6000</td></tr></tbody></table>
+<graphic xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="apjl488205t2_tb.gif"/>
+<graphic alternate-form-of="apjl488205t2" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="apjl488205t2_lr.gif"><caption><p>Typeset image</p></caption></graphic></table-wrap>
+<p>The number of stars is derived using the astronomical database SIMBAD, which also allows one to set the membership probability. In any case, the five different galactic open clusters present in the Letter have been chosen in order to provide a wide range of stellar densities and ages in the cluster.</p>
+<p>The relation between the specific free-floating planet production rate <inline-formula><tex-math><?CDATA $\dot{N}_o$?></tex-math><inline-graphic xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="apjl488205ieqn3.gif"/></inline-formula> and the stellar density &rho;<sub>&sstarf;</sub> is given by <inline-formula><tex-math><?CDATA $\dot{N}_o = \alpha \rho _\star$?></tex-math><inline-graphic xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="apjl488205ieqn4.gif"/></inline-formula>, where &alpha; &equals; (23 &plusmn; 5) &times; 10<sup>&minus;6</sup>&thinsp;pc<sup>3</sup>&thinsp;Myr<sup>&minus;1</sup>. See also Spurzem et al. (<xref ref-type="bibr" rid="apjl488205r39">2009</xref>), where similar results are obtained. This strikingly simple relation indicates that the presence and abundance of free-floating planets is clearly related to environmental stellar density. In addition, these clusters formed as more massive than they are today and with very different central densities and density structures, so that our predictions for the free-floating planet formation rate are again strictly lower limit estimates. The evolution of the eccentricity of the planetary population of the Pleiades is shown in Figure <xref ref-type="fig" rid="apjl488205f2">2</xref>. The contour plot describes the overall increase with time of the eccentricity of the planetary population. A direct comparison between our results, obtained with a sub-grid approach, and a fully self-consistent integration of a system of 2<italic>N</italic> particles has been made. In the case of the Pleiades cluster, the total number of free-floating planets is higher by less than 10&percnt; with the use of a self-consistent integration.</p>
+<fig id="apjl488205f2" fig-type="color"><label>Figure 2.</label>
+<caption><p>Time evolution of the eccentricities of the planetary population of the Pleiades, up to 100&nbsp;Myr of evolution. The contour plot shows the distribution of eccentricities as a function of time, along with the distribution of eccentricities for the population of bounded planets at the final simulation time. The lower-most orange bar refers to (unperturbed) planets that are still in the initial eccentricity bin (<italic>e</italic><sub>0</sub> &ap; 0.042). This population is the dominant one and it has not been included in the contour plot for the sake of clarity. Finally, the top panel reports the cumulative number of free-floating planets as a function of time, reaching a level &sim;800 at the end of the simulation.</p></caption><graphic id="apjl488205f2_eps" content-type="print" alt-version="yes" xlink:href="apjl488205f2_pr.eps"/>
+<graphic id="apjl488205f2_tb" content-type="thumb" alt-version="yes" xlink:href="apjl488205f2_tb.jpg"/>
+<graphic id="apjl488205f2_lr" content-type="low" alt-version="yes" xlink:href="apjl488205f2_lr.jpg"/>
+<graphic id="apjl488205f2_hr" content-type="high" alt-version="yes" xlink:href="apjl488205f2_hr.jpg"/>
+<graphic id="apjl488205f2_au" content-type="author" xlink:href="apjl488205f2_au.ps"/></fig></sec>
+<sec id="apjl488205s4"><label>4.</label><title>OBSERVABILITY OF FREE-FLOATING PLANETS</title>
+<p>As free-floating planets do not orbit around a star, their direct detection, usually hampered by the unmanageably high contrast with the star for normal planets (Sumi et al. <xref ref-type="bibr" rid="apjl488205r40">2011</xref>; Dong et al. <xref ref-type="bibr" rid="apjl488205r16">2013</xref>; Delorme et al. <xref ref-type="bibr" rid="apjl488205r15">2012</xref>; Beichman et al. <xref ref-type="bibr" rid="apjl488205r6">2013</xref>; Gould &amp; Yee <xref ref-type="bibr" rid="apjl488205r22">2013</xref>), might be possible in the infrared with the <italic>James Webb Space Telescope</italic> (<italic>JWST</italic>) (Burrows et al. <xref ref-type="bibr" rid="apjl488205r10">2003</xref>). Figure <xref ref-type="fig" rid="apjl488205f3">3</xref> shows a simulated image (for the typical 2.2 arcmin field of view of the <italic>JWST</italic>&sol;NIRCam instrument) of the central region of the Pleiades cluster, evolved up to 10&nbsp;Myr. The values of the flux (in nJy, at 4.4&thinsp;&mu;m) are calculated assuming the appropriate spectrum for both the stars (assumed to be Sun-like) and the free-floating planets (assumed to have a surface temperature <italic>T</italic><sub>eff</sub> &equals; 500&nbsp;K). The free-floating planet inside the field is indicated with a white arrow; its flux is <italic>F</italic><sub>&nu;</sub> (4.4&thinsp;&mu;m) &ap;4 &times; 10<sup>2</sup>&nbsp;nJy and it is detectable in 3600 s of integration time with a signal-to-noise ratio (S&sol;N) &sim; 100 (see the <italic>JWST</italic> Exposure Time Calculator for reference).</p>
+<fig id="apjl488205f3" fig-type="color"><label>Figure 3.</label>
+<caption><p>Right panel: simulated image of the central region of the Pleiades, after 10&nbsp;Myr of evolution showing the expected flux at &lambda; &equals; 4.4&thinsp;&mu;m from stars and free-floating planets. Left panel: a typical field of the NIRCam camera onboard the future <italic>JWST</italic> observatory. The arrow shows the location of a free-floating planet with a surface temperature of &sim;500&nbsp;K.</p></caption><graphic id="apjl488205f3_eps" content-type="print" alt-version="yes" xlink:href="apjl488205f3_pr.eps"/>
+<graphic id="apjl488205f3_tb" content-type="thumb" alt-version="yes" xlink:href="apjl488205f3_tb.jpg"/>
+<graphic id="apjl488205f3_lr" content-type="low" alt-version="yes" xlink:href="apjl488205f3_lr.jpg"/>
+<graphic id="apjl488205f3_hr" content-type="high" alt-version="yes" xlink:href="apjl488205f3_hr.jpg"/>
+<graphic id="apjl488205f3_au" content-type="author" xlink:href="apjl488205f3_au.ps"/></fig>
+<p>Free-floating planets can then be detected by the NIRCam if <italic>T</italic><sub>eff</sub> &gsim; 300&nbsp;K, because for lower surface temperatures the specific flux would be too faint. For example, with <italic>T<sub>s</sub></italic> &equals; 300&nbsp;K, the corresponding specific flux would be <italic>F</italic><sub>&nu;</sub>(4.4&thinsp;&mu;m) &ap; 8&nbsp;nJy, which needs &sim;1&nbsp;hr of integration to reach the S&sol;N &sim; 2 level.</p>
+<p>The actual observation of free-floating planets implies the possibility of distinguishing them from very far away stars (which are redshifted to the infrared) and brown dwarfs already formed in isolation inside the open cluster. The fact that background stars are dynamically detached should serve as a means to distinguish them from our free-floating planet population, thanks to their higher redshift and possibly different proper motion. The distinction between free-floating planets extracted from bounded planetary systems and isolated brown dwarfs is more difficult. The rate of formation of isolated brown dwarfs inside open clusters may be deduced from the low-mass end of the initial mass function. Comparing the theoretical predictions with the observed population of free-floating planets, the excess probability over the formation rate of isolated brown dwarfs could be accounted for as a measure of the occurrence of free-floating planets predicted by our model.</p></sec>
+<sec id="apjl488205s5"><label>5.</label><title>CONCLUSIONS</title>
+<p>In this work we have shown that tidal interactions between stars in relatively high-density environments, such as open stellar clusters, may well cause the ejection of external planets from their systems. By using an accurate sub-grid model setup for a large parameter space, we have performed a purely <italic>N</italic>-body simulation of different Galactic open stellar clusters, with different morphological properties and ages. Assigning a planetary body of Jupiter-mass and variable distance from the parent star to each star, we have studied the occurrence of free-floating planets over the entire evolution of each cluster, also accounting for the possibility of a planet being recaptured by another star. In particular, we have shown that the specific free-floating planet production rate <inline-formula><tex-math><?CDATA $\dot{N}_o$?></tex-math><inline-graphic xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="apjl488205ieqn5.gif"/></inline-formula> is linearly related to the stellar density of the cluster &rho;<sub>&sstarf;</sub>: <inline-formula><tex-math><?CDATA $\dot{N}_o = \alpha \rho _\star$?></tex-math><inline-graphic xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="apjl488205ieqn6.gif"/></inline-formula>, with &alpha; &equals; (23 &plusmn; 5) &times; 10<sup>&minus;6</sup>&thinsp;pc<sup>3</sup>&thinsp;Myr<sup>&minus;1</sup>. Specifically, for the Pleiades we predict that &sim;26&percnt; of the stars should have lost their planet during the evolution of the cluster.</p>
+<p>The high contrast with the star for bounded planets poses very strict, and usually unmanageable, limits on their direct observation. On the contrary, the large population of free-floating planets predicted in this work might be detected with the next generation of space telescopes, given that their surface temperature is sufficiently high. The study on observability shows that even with a relatively low-temperature planet at 300&nbsp;K, a detection may be feasible in the infrared band, using the NIRcam instrument onboard the future <italic>JWST</italic> observatory. A clear detection becomes much more feasible if the free-floating planets (or at least a fraction of them) reach temperatures of at least &sim;500&nbsp;K. The coolest brown dwarf candidates have very similar surface temperatures (Luhman et al. <xref ref-type="bibr" rid="apjl488205r26">2012</xref>), so the lower bound of &sim;300&nbsp;K might be reached by a large fraction of the population of free-floating planets. The detection of free-floating planets would open a new pathway to exoplanetary and stellar-cluster studies, allowing us to test the survival and evolution of planets under extreme interstellar conditions.</p></sec></body>
+<back>
+<ack><p>We are grateful to Kostantin Batygin for suggestions and a careful reading of the manuscript. E.D. gratefully acknowledges the support of the Alfred P. Sloan Foundation.</p></ack>
+<ref-list>
+<title>References</title>
+<ref id="apjl488205r1">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Aarseth</surname>
+<given-names>S. J.</given-names></name>
+</person-group>
+<source>PASP</source>
+<year>1999</year>
+<volume>111</volume>
+<fpage>1333</fpage>
+<ext-link ext-link-type="bibcode">1999PASP..111.1333A</ext-link>
+<ext-link ext-link-type="doi">10.1086/316455</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r2">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Adams</surname>
+<given-names>F. C.</given-names></name>
+</person-group>
+<source>ARA&amp;A</source>
+<year>2010</year>
+<volume>48</volume>
+<fpage>47</fpage>
+<ext-link ext-link-type="bibcode">2010ARA&amp;A..48...47A</ext-link>
+<ext-link ext-link-type="doi">10.1146/annurev-astro-081309-130830</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r3">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Adams</surname>
+<given-names>F. C.</given-names></name>
+<name><surname>Proszkow</surname>
+<given-names>E. M.</given-names></name>
+<name><surname>Fatuzzo</surname>
+<given-names>M.</given-names></name>
+<name><surname>Myers</surname>
+<given-names>P. C.</given-names></name>
+</person-group>
+<source>ApJ</source>
+<year>2006</year>
+<volume>641</volume>
+<fpage>504</fpage>
+<ext-link ext-link-type="bibcode">2006ApJ...641..504A</ext-link>
+<ext-link ext-link-type="doi">10.1086/500393</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r4">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Batygin</surname>
+<given-names>K.</given-names></name>
+<name><surname>Brown</surname>
+<given-names>M. E.</given-names></name>
+</person-group>
+<source>ApJ</source>
+<year>2010</year>
+<volume>716</volume>
+<fpage>1323</fpage>
+<ext-link ext-link-type="bibcode">2010ApJ...716.1323B</ext-link>
+<ext-link ext-link-type="doi">10.1088/0004-637X/716/2/1323</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r5">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Batygin</surname>
+<given-names>K.</given-names></name>
+<name><surname>Brown</surname>
+<given-names>M. E.</given-names></name>
+<name><surname>Betts</surname>
+<given-names>H.</given-names></name>
+</person-group>
+<source>ApJ</source>
+<year>2012</year>
+<volume>744</volume>
+<fpage>L3</fpage>
+<ext-link ext-link-type="bibcode">2012ApJ...744L...3B</ext-link>
+<ext-link ext-link-type="doi">10.1088/2041-8205/744/1/L3</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r6">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Beichman</surname>
+<given-names>C.</given-names></name>
+<name><surname>Gelino</surname>
+<given-names>C. R.</given-names></name>
+<name><surname>Kirkpatrick</surname>
+<given-names>J. D.</given-names></name>
+<etal/></person-group>
+<source>ApJ</source>
+<year>2013</year>
+<volume>764</volume>
+<fpage>101</fpage>
+<ext-link ext-link-type="bibcode">2013ApJ...764..101B</ext-link>
+<ext-link ext-link-type="doi">10.1088/0004-637X/764/1/101</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r7">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Boley</surname>
+<given-names>A. C.</given-names></name>
+<name><surname>Payne</surname>
+<given-names>M. J.</given-names></name>
+<name><surname>Ford</surname>
+<given-names>E. B.</given-names></name>
+</person-group>
+<source>ApJ</source>
+<year>2012</year>
+<volume>754</volume>
+<fpage>57</fpage>
+<ext-link ext-link-type="bibcode">2012ApJ...754...57B</ext-link>
+<ext-link ext-link-type="doi">10.1088/0004-637X/754/1/57</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r8">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Bovaird</surname>
+<given-names>T.</given-names></name>
+<name><surname>Lineweaver</surname>
+<given-names>C. H.</given-names></name>
+</person-group>
+<source>MNRAS</source>
+<year>2013</year>
+<volume>435</volume>
+<fpage>1126</fpage>
+<ext-link ext-link-type="bibcode">2013MNRAS.435.1126B</ext-link>
+<ext-link ext-link-type="doi">10.1093/mnras/stt1357</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r9">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Brasser</surname>
+<given-names>R.</given-names></name>
+<name><surname>Duncan</surname>
+<given-names>M. J.</given-names></name>
+<name><surname>Levison</surname>
+<given-names>H. F.</given-names></name>
+<name><surname>Schwamb</surname>
+<given-names>M. E.</given-names></name>
+<name><surname>Brown</surname>
+<given-names>M. E.</given-names></name>
+</person-group>
+<source>Icar</source>
+<year>2012</year>
+<volume>217</volume>
+<fpage>1</fpage>
+<ext-link ext-link-type="bibcode">2012Icar..217....1B</ext-link>
+<ext-link ext-link-type="doi">10.1016/j.icarus.2011.10.012</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r10">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Burrows</surname>
+<given-names>A.</given-names></name>
+<name><surname>Sudarsky</surname>
+<given-names>D.</given-names></name>
+<name><surname>Lunine</surname>
+<given-names>J. I.</given-names></name>
+</person-group>
+<source>ApJ</source>
+<year>2003</year>
+<volume>596</volume>
+<fpage>587</fpage>
+<ext-link ext-link-type="bibcode">2003ApJ...596..587B</ext-link>
+<ext-link ext-link-type="doi">10.1086/377709</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r11">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Charbonneau</surname>
+<given-names>D.</given-names></name>
+<name><surname>Brown</surname>
+<given-names>T. M.</given-names></name>
+<name><surname>Latham</surname>
+<given-names>D. W.</given-names></name>
+<name><surname>Mayor</surname>
+<given-names>M.</given-names></name>
+</person-group>
+<source>ApJ</source>
+<year>2000</year>
+<volume>529</volume>
+<fpage>L45</fpage>
+<ext-link ext-link-type="bibcode">2000ApJ...529L..45C</ext-link>
+<ext-link ext-link-type="doi">10.1086/312457</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r12">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Chatterjee</surname>
+<given-names>S.</given-names></name>
+<name><surname>Ford</surname>
+<given-names>E. B.</given-names></name>
+<name><surname>Geller</surname>
+<given-names>A. M.</given-names></name>
+<name><surname>Rasio</surname>
+<given-names>F. A.</given-names></name>
+</person-group>
+<source>MNRAS</source>
+<year>2012</year>
+<volume>427</volume>
+<fpage>1587</fpage>
+<ext-link ext-link-type="bibcode">2012MNRAS.427.1587C</ext-link>
+<ext-link ext-link-type="doi">10.1111/j.1365-2966.2012.22057.x</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r13">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Craig</surname>
+<given-names>J.</given-names></name>
+<name><surname>Krumholz</surname>
+<given-names>M. R.</given-names></name>
+</person-group>
+<source>ApJ</source>
+<year>2013</year>
+<volume>769</volume>
+<fpage>150</fpage>
+<ext-link ext-link-type="bibcode">2013ApJ...769..150C</ext-link>
+<ext-link ext-link-type="doi">10.1088/0004-637X/769/2/150</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r14">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>de Juan Ovelar</surname>
+<given-names>M.</given-names></name>
+<name><surname>Kruijssen</surname>
+<given-names>J. M. D.</given-names></name>
+<name><surname>Bressert</surname>
+<given-names>E.</given-names></name>
+<etal/></person-group>
+<source>A&amp;A</source>
+<year>2012</year>
+<volume>546</volume>
+<fpage>L1</fpage>
+<ext-link ext-link-type="bibcode">2012A&amp;A...546L...1D</ext-link>
+<ext-link ext-link-type="doi">10.1051/0004-6361/201219627</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r15">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Delorme</surname>
+<given-names>P.</given-names></name>
+<name><surname>Gagn</surname>
+<given-names>J.</given-names></name>
+<name><surname>Malo</surname>
+<given-names>L.</given-names></name>
+<etal/></person-group>
+<source>A&amp;A</source>
+<year>2012</year>
+<volume>548</volume>
+<fpage>A26</fpage>
+<ext-link ext-link-type="bibcode">2012A&amp;A...548A..26D</ext-link>
+<ext-link ext-link-type="doi">10.1051/0004-6361/201219984</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r16">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Dong</surname>
+<given-names>S.</given-names></name>
+<name><surname>Katz</surname>
+<given-names>B.</given-names></name>
+<name><surname>Socrates</surname>
+<given-names>A.</given-names></name>
+</person-group>
+<source>ApJL</source>
+<year>2013</year>
+<volume>762</volume>
+<fpage>L26</fpage>
+<ext-link ext-link-type="bibcode">2013ApJ...762L..26D</ext-link>
+<ext-link ext-link-type="doi">10.1088/2041-8205/762/2/L26</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r17">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>D&rsquo;Onghia</surname>
+<given-names>E.</given-names></name>
+<name><surname>Vogelsberger</surname>
+<given-names>M.</given-names></name>
+<name><surname>Faucher-Giguere</surname>
+<given-names>C.-A.</given-names></name>
+<name><surname>Hernquist</surname>
+<given-names>L.</given-names></name>
+</person-group>
+<source>ApJ</source>
+<year>2010</year>
+<volume>725</volume>
+<fpage>353</fpage>
+<ext-link ext-link-type="bibcode">2010ApJ...725..353D</ext-link>
+<ext-link ext-link-type="doi">10.1088/0004-637X/725/1/353</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r18">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Ernst</surname>
+<given-names>A.</given-names></name>
+<name><surname>Just</surname>
+<given-names>A.</given-names></name>
+<name><surname>Berczik</surname>
+<given-names>P.</given-names></name>
+<name><surname>Olczak</surname>
+<given-names>C.</given-names></name>
+</person-group>
+<source>A&amp;A</source>
+<year>2011</year>
+<volume>536</volume>
+<fpage>A64</fpage>
+<ext-link ext-link-type="bibcode">2011A&amp;A...536A..64E</ext-link>
+<ext-link ext-link-type="doi">10.1051/0004-6361/201118021</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r19">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Fabrycky</surname>
+<given-names>D.</given-names></name>
+<name><surname>Tremaine</surname>
+<given-names>S.</given-names></name>
+</person-group>
+<source>ApJ</source>
+<year>2007</year>
+<volume>669</volume>
+<fpage>1298</fpage>
+<ext-link ext-link-type="bibcode">2007ApJ...669.1298F</ext-link>
+<ext-link ext-link-type="doi">10.1086/521702</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r20">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Fischer</surname>
+<given-names>D. A.</given-names></name>
+<name><surname>Valenti</surname>
+<given-names>J.</given-names></name>
+</person-group>
+<source>ApJ</source>
+<year>2005</year>
+<volume>622</volume>
+<fpage>1102</fpage>
+<ext-link ext-link-type="bibcode">2005ApJ...622.1102F</ext-link>
+<ext-link ext-link-type="doi">10.1086/428383</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r21">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Goldreich</surname>
+<given-names>P.</given-names></name>
+<name><surname>Tremaine</surname>
+<given-names>S.</given-names></name>
+</person-group>
+<source>ApJ</source>
+<year>1980</year>
+<volume>241</volume>
+<fpage>425</fpage>
+<ext-link ext-link-type="bibcode">1980ApJ...241..425G</ext-link>
+<ext-link ext-link-type="doi">10.1086/158356</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r22">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Gould</surname>
+<given-names>A.</given-names></name>
+<name><surname>Yee</surname>
+<given-names>J. C.</given-names></name>
+</person-group>
+<source>ApJ</source>
+<year>2013</year>
+<volume>764</volume>
+<fpage>107</fpage>
+<ext-link ext-link-type="bibcode">2013ApJ...764..107G</ext-link>
+<ext-link ext-link-type="doi">10.1088/0004-637X/764/1/107</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r23">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Kraus</surname>
+<given-names>A. L.</given-names></name>
+<name><surname>Hillenbrand</surname>
+<given-names>L. A.</given-names></name>
+</person-group>
+<source>AJ</source>
+<year>2007</year>
+<volume>134</volume>
+<fpage>2340</fpage>
+<ext-link ext-link-type="bibcode">2007AJ....134.2340K</ext-link>
+<ext-link ext-link-type="doi">10.1086/522831</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r24">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Lin</surname>
+<given-names>D. N. C.</given-names></name>
+<name><surname>Pringle</surname>
+<given-names>J. E.</given-names></name>
+</person-group>
+<source>BAAS</source>
+<year>1976</year>
+<volume>8</volume>
+<fpage>450</fpage>
+<ext-link ext-link-type="bibcode">1976BAAS....8..450L</ext-link>
+</nlm-citation>
+</ref>
+<ref id="apjl488205r25">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Luhman</surname>
+<given-names>K. L.</given-names></name>
+<name><surname>Burgasser</surname>
+<given-names>A. J.</given-names></name>
+<name><surname>Bochanski</surname>
+<given-names>J. J.</given-names></name>
+</person-group>
+<source>ApJL</source>
+<year>2011</year>
+<volume>730</volume>
+<fpage>L9</fpage>
+<ext-link ext-link-type="bibcode">2011ApJ...730L...9L</ext-link>
+<ext-link ext-link-type="doi">10.1088/2041-8205/730/1/L9</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r26">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Luhman</surname>
+<given-names>K. L.</given-names></name>
+<name><surname>Burgasser</surname>
+<given-names>A. J.</given-names></name>
+<name><surname>Labb&eacute;</surname>
+<given-names>I.</given-names></name>
+<etal/></person-group>
+<source>ApJ</source>
+<year>2012</year>
+<volume>744</volume>
+<fpage>135</fpage>
+<ext-link ext-link-type="bibcode">2012ApJ...744..135L</ext-link>
+<ext-link ext-link-type="doi">10.1088/0004-637X/744/2/135</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r27">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Masset</surname>
+<given-names>F.</given-names></name>
+<name><surname>Snellgrove</surname>
+<given-names>M.</given-names></name>
+</person-group>
+<source>MNRAS</source>
+<year>2001</year>
+<volume>320</volume>
+<fpage>L55</fpage>
+<ext-link ext-link-type="bibcode">2001MNRAS.320L..55M</ext-link>
+<ext-link ext-link-type="doi">10.1046/j.1365-8711.2001.04159.x</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r28">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Mayor</surname>
+<given-names>M.</given-names></name>
+<name><surname>Queloz</surname>
+<given-names>D.</given-names></name>
+</person-group>
+<source>Natur</source>
+<year>1995</year>
+<volume>378</volume>
+<fpage>355</fpage>
+<ext-link ext-link-type="bibcode">1995Natur.378..355M</ext-link>
+<ext-link ext-link-type="doi">10.1038/378355a0</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r29">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Meibom</surname>
+<given-names>S.</given-names></name>
+<name><surname>Torres</surname>
+<given-names>G.</given-names></name>
+<name><surname>Fressin</surname>
+<given-names>F.</given-names></name>
+<etal/></person-group>
+<source>Natur</source>
+<year>2013</year>
+<volume>499</volume>
+<fpage>55</fpage>
+<ext-link ext-link-type="bibcode">2013Natur.499...55M</ext-link>
+<ext-link ext-link-type="doi">10.1038/nature12279</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r30">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Morbidelli</surname>
+<given-names>A.</given-names></name>
+<name><surname>Tsiganis</surname>
+<given-names>K.</given-names></name>
+<name><surname>Crida</surname>
+<given-names>A.</given-names></name>
+<name><surname>Levison</surname>
+<given-names>H. F.</given-names></name>
+<name><surname>Gomes</surname>
+<given-names>R.</given-names></name>
+</person-group>
+<source>AJ</source>
+<year>2007</year>
+<volume>134</volume>
+<fpage>1790</fpage>
+<ext-link ext-link-type="bibcode">2007AJ....134.1790M</ext-link>
+<ext-link ext-link-type="doi">10.1086/521705</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r31">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Moulds</surname>
+<given-names>V. E.</given-names></name>
+<name><surname>Watson</surname>
+<given-names>C. A.</given-names></name>
+<name><surname>Bonfils</surname>
+<given-names>X.</given-names></name>
+<name><surname>Littlefair</surname>
+<given-names>S. P.</given-names></name>
+<name><surname>Simpson</surname>
+<given-names>E. K.</given-names></name>
+</person-group>
+<source>MNRAS</source>
+<year>2013</year>
+<volume>430</volume>
+<fpage>1709</fpage>
+<ext-link ext-link-type="bibcode">2013MNRAS.430.1709M</ext-link>
+<ext-link ext-link-type="doi">10.1093/mnras/sts709</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r32">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Nesvorn&yacute;</surname>
+<given-names>D.</given-names></name>
+</person-group>
+<source>ApJ</source>
+<year>2011</year>
+<volume>742</volume>
+<fpage>L22</fpage>
+<ext-link ext-link-type="bibcode">2011ApJ...742L..22N</ext-link>
+<ext-link ext-link-type="doi">10.1088/2041-8205/742/2/L22</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r33">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Nesvorn&yacute;</surname>
+<given-names>D.</given-names></name>
+<name><surname>Morbidelli</surname>
+<given-names>A.</given-names></name>
+</person-group>
+<source>AJ</source>
+<year>2012</year>
+<volume>144</volume>
+<fpage>117</fpage>
+<ext-link ext-link-type="bibcode">2012AJ....144..117N</ext-link>
+<ext-link ext-link-type="doi">10.1088/0004-6256/144/4/117</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r34">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Nilakshi Sagar</surname>
+<given-names>R.</given-names></name>
+<name><surname>Pandey</surname>
+<given-names>A. K.</given-names></name>
+<name><surname>Mohan</surname>
+<given-names>V.</given-names></name>
+</person-group>
+<source>A&amp;A</source>
+<year>2002</year>
+<volume>383</volume>
+<fpage>153</fpage>
+<ext-link ext-link-type="bibcode">2002A&amp;A...383..153N</ext-link>
+<ext-link ext-link-type="doi">10.1051/0004-6361:20011719</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r35">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Parker</surname>
+<given-names>R. J.</given-names></name>
+<name><surname>Quanz</surname>
+<given-names>S. P.</given-names></name>
+</person-group>
+<source>MNRAS</source>
+<year>2012</year>
+<volume>419</volume>
+<fpage>2448</fpage>
+<ext-link ext-link-type="bibcode">2012MNRAS.419.2448P</ext-link>
+<ext-link ext-link-type="doi">10.1111/j.1365-2966.2011.19911.x</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r36">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Perets</surname>
+<given-names>H. B.</given-names></name>
+<name><surname>Kouwenhoven</surname>
+<given-names>M. B. N.</given-names></name>
+</person-group>
+<source>ApJ</source>
+<year>2012</year>
+<volume>750</volume>
+<fpage>83</fpage>
+<ext-link ext-link-type="bibcode">2012ApJ...750...83P</ext-link>
+<ext-link ext-link-type="doi">10.1088/0004-637X/750/1/83</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r37">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Quinn</surname>
+<given-names>S. N.</given-names></name>
+<name><surname>White</surname>
+<given-names>R. J.</given-names></name>
+<name><surname>Latham</surname>
+<given-names>D. W.</given-names></name>
+<etal/></person-group>
+<source>ApJL</source>
+<year>2012</year>
+<volume>756</volume>
+<fpage>L33</fpage>
+<ext-link ext-link-type="bibcode">2012ApJ...756L..33Q</ext-link>
+<ext-link ext-link-type="doi">10.1088/2041-8205/756/2/L33</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r38">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Rasio</surname>
+<given-names>F. A.</given-names></name>
+<name><surname>Ford</surname>
+<given-names>E. B.</given-names></name>
+</person-group>
+<source>Sci</source>
+<year>1996</year>
+<volume>274</volume>
+<fpage>954</fpage>
+<ext-link ext-link-type="bibcode">1996Sci...274..954R</ext-link>
+<ext-link ext-link-type="doi">10.1126/science.274.5289.954</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r39">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Spurzem</surname>
+<given-names>R.</given-names></name>
+<name><surname>Giersz</surname>
+<given-names>M.</given-names></name>
+<name><surname>Heggie</surname>
+<given-names>D. C.</given-names></name>
+<name><surname>Lin</surname>
+<given-names>D. N. C.</given-names></name>
+</person-group>
+<source>ApJ</source>
+<year>2009</year>
+<volume>697</volume>
+<fpage>458</fpage>
+<ext-link ext-link-type="bibcode">2009ApJ...697..458S</ext-link>
+<ext-link ext-link-type="doi">10.1088/0004-637X/697/1/458</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r40">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Sumi</surname>
+<given-names>T.</given-names></name>
+<name><surname>Kamiya</surname>
+<given-names>K.</given-names></name>
+<name><surname>Bennett</surname>
+<given-names>D. P.</given-names></name>
+<etal/></person-group>
+<source>Natur</source>
+<year>2011</year>
+<volume>473</volume>
+<fpage>349</fpage>
+<ext-link ext-link-type="bibcode">2011Natur.473..349S</ext-link>
+<ext-link ext-link-type="doi">10.1038/nature10092</ext-link>
+</nlm-citation>
+</ref>
+<ref id="apjl488205r41">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Veras</surname>
+<given-names>D.</given-names></name>
+<name><surname>Raymond</surname>
+<given-names>S. N.</given-names></name>
+</person-group>
+<source>MNRAS</source>
+<year>2012</year>
+<volume>421</volume>
+<fpage>L117</fpage>
+<ext-link ext-link-type="bibcode">2012MNRAS.421L.117V</ext-link>
+<ext-link ext-link-type="doi">10.1111/j.1365-2966.2012.20522.x</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r42">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Wright</surname>
+<given-names>J. T.</given-names></name>
+<name><surname>Fakhouri</surname>
+<given-names>O.</given-names></name>
+<name><surname>Marcy</surname>
+<given-names>G. W.</given-names></name><etal/>
+</person-group>
+<source>PASP</source>
+<year>2011a</year>
+<volume>123</volume>
+<fpage>412</fpage>
+<ext-link ext-link-type="bibcode">2011PASP..123..412W</ext-link>
+<ext-link ext-link-type="doi">10.1086/659427</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r43">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Wright</surname>
+<given-names>J. T.</given-names></name>
+<name><surname>Veras</surname>
+<given-names>D.</given-names></name>
+<name><surname>Ford</surname>
+<given-names>E. B.</given-names></name><etal/>
+</person-group>
+<source>ApJ</source>
+<year>2011b</year>
+<volume>730</volume>
+<fpage>93</fpage>
+<ext-link ext-link-type="bibcode">2011ApJ...730...93W</ext-link>
+<ext-link ext-link-type="doi">10.1088/0004-637X/730/2/93</ext-link></nlm-citation>
+</ref>
+<ref id="apjl488205r44">
+<nlm-citation citation-type="journal">
+<person-group person-group-type="author">
+<name><surname>Wu</surname>
+<given-names>Y.</given-names></name>
+<name><surname>Lithwick</surname>
+<given-names>Y.</given-names></name>
+</person-group>
+<source>ApJ</source>
+<year>2011</year>
+<volume>735</volume>
+<fpage>109</fpage>
+<ext-link ext-link-type="bibcode">2011ApJ...735..109W</ext-link>
+<ext-link ext-link-type="doi">10.1088/0004-637X/735/2/109</ext-link></nlm-citation>
+</ref>
+</ref-list>
+</back>
+</article>
