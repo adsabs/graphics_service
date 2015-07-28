@@ -3,6 +3,7 @@ import re
 import sys
 import shutil
 import commands
+import requests
 from flask import current_app, request
 from client import client
 from models import db, GraphicsModel
@@ -163,6 +164,7 @@ def manage_IOP_graphics(fulltext, bibcode, DOI, source, id2thumb,
         graphic = None
     # URL templates for thumbnail images and high res images
     thumbURL = "https://s3.amazonaws.com/aasie/images/%s/%s_tb.%s"
+    loresURL = "https://s3.amazonaws.com/aasie/images/%s/%s_lr.%s"
     highURL = "http://www.astroexplorer.org/details/%s"
     # Regular expression for parsing full text files
     fig_pat = re.compile(
@@ -172,12 +174,16 @@ def manage_IOP_graphics(fulltext, bibcode, DOI, source, id2thumb,
         r'''<label>(?P<label>.*?)</label>''',
         re.VERBOSE | re.DOTALL | re.IGNORECASE)
     cap_pat = re.compile(
-        r'''<caption>(?P<caption>.*?)</caption>''',
+        r'''<caption.*?>(?P<caption>.*?)</caption>''',
         re.VERBOSE | re.DOTALL | re.IGNORECASE)
-    gph_pat = re.compile(
+    thumb_pat = re.compile(
         '<graphic\s+id="(?P<id>.*?)"\s+'
         'content-type="thumb"\s+'
         'alt-version="yes"\s+xlink:href="(?P<href>.*?)"/>')
+    lores_pat = re.compile(
+        '<graphic\s+id="(?P<id>.*?)"\s+'
+        'content-type="low"\s+'
+        'xlink:href="(?P<href>.*?)"/>')
     figures = []
     # Strip publisher part from DOI to use in thumbnail URL
     art_path = re.sub('^.*?/', '', DOI)
@@ -204,7 +210,7 @@ def manage_IOP_graphics(fulltext, bibcode, DOI, source, id2thumb,
         fig_data['figure_label'] = label
         fig_data['figure_caption'] = caption
         cs = 0
-        imat = gph_pat.search(fg, cs)
+        imat = thumb_pat.search(fg, cs)
         done = []
         while imat:
             image_id = imat.group('id').split('_')[0]
@@ -217,14 +223,51 @@ def manage_IOP_graphics(fulltext, bibcode, DOI, source, id2thumb,
             # in URL
             if bibcode[4:9] == 'AJ...':
                 thumb = thumb.replace('0004-6256', '1538-3881')
+            # Unfortunately we have to test if the thumbnail URL exists
+            check = requests.get(thumb)
             if image_id not in done:
-                images.append({'image_id': image_id,
+                if int(check.status_code) == 200:
+                    images.append({'image_id': image_id,
                                'format': format,
                                'thumbnail': thumb,
                                'highres': highURL % image_id})
-                done.append(image_id)
+                    done.append(image_id)
+                else:
+                    sys.stderr.write('Thumb URL returned status %s: %s\n'%(check.statuscode, thumb))
             cs = imat.end()
-            imat = gph_pat.search(fg, cs)
+            imat = thumb_pat.search(fg, cs)
+        # The images list will be empty for articles mid-2015 on, since it
+        # seems that there is no longer a thumbnail entry among the graphics
+        # entries. The low-res seems to have taken it place. Therefore we
+        # need to parse out those in that case
+        if len(images) == 0:
+            cs = 0
+            imat = lores_pat.search(fg, cs)
+            done = []
+            while imat:
+                image_id = imat.group('id').split('_')[0]
+                format = 'gif'
+                if imat.group('href').split('.')[-1].lower() == 'jpg':
+                    format = 'jpg'
+                thumb = id2thumb.get(
+                    image_id, thumbURL % (art_path, image_id, format))
+                # fix for AJ (they use print ISSN in file path, but electronic ISSN
+                # in URL
+                if bibcode[4:9] == 'AJ...':
+                    thumb = thumb.replace('0004-6256', '1538-3881')
+                # Unfortunately we have to test if the thumbnail URL exists
+                check = requests.get(thumb)
+                if image_id not in done:
+                    if int(check.status_code) == 200:
+                        images.append({'image_id': image_id,
+                                   'format': format,
+                                   'thumbnail': thumb,
+                                   'highres': highURL % image_id})
+                        done.append(image_id)
+                    else:
+                        sys.stderr.write('Thumb URL returned status %s: %s\n'%(check.statuscode, thumb))
+                cs = imat.end()
+                imat = lores_pat.search(fg, cs)
         if len(images) > 0:
             fig_data['images'] = images
             figures.append(fig_data)
