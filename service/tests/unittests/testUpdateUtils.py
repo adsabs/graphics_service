@@ -156,8 +156,9 @@ class TestFileOps(TestCase):
         self.assertEqual(im_data[0], expected)
         # Check cleaned data
         cleaned = prepare_image_data(im_data, tex_file, converted_images)
-        expected = ('/proj.adsx/edwin/projects/graphics_proto/service/tests/stubdata/NN/figure09.png', 'figure05.ps', '')
-        self.assertEqual(cleaned[-1], expected)
+        self.assertEqual(os.path.basename(cleaned[-1][0]), 'figure09.png')
+        self.assertEqual(cleaned[-1][1], 'figure05.ps')
+        self.assertEqual(cleaned[-1][2], '')
         # Check extracted context
         context = extract_context(tex_file, cleaned)
         expected = ('', 'noimgDistance to M~51', '', [])
