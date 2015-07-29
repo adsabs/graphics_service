@@ -12,6 +12,7 @@ from datetime import datetime
 from invenio_tools import extract_captions, prepare_image_data,\
     extract_context, remove_dups
 
+requests.packages.urllib3.disable_warnings()
 
 def get_identifiers(bibstem, year, source):
     """
@@ -144,6 +145,10 @@ def process_IOP_graphics(identifiers, force, dryrun=False):
             buffer = open(ft_file).read()
         else:
             # No full text file, skip
+            if ft_file:
+                sys.stderr.write('Incorrect full text mapping for %s: %s\n'%(paper, ft_file))
+            else:
+                sys.stderr.write('No full text found for %s\n' % paper)
             continue
         dmat = doi_pat.search(buffer)
         try:
@@ -151,7 +156,11 @@ def process_IOP_graphics(identifiers, force, dryrun=False):
         except:
             sys.stderr.write('Cannot find DOI: %s\n' % ft_file)
             continue
-        nfigs = manage_IOP_graphics(buffer, paper, DOI, src, id2thumb, dryrun=dryrun)
+        try:
+            nfigs = manage_IOP_graphics(buffer, paper, DOI, src, id2thumb, dryrun=dryrun)
+        except Exception, e:
+            sys.stderr.write('Error processing %s (%s)\n'%(paper, e))
+            continue
     return nfigs
 
 def manage_IOP_graphics(fulltext, bibcode, DOI, source, id2thumb,
