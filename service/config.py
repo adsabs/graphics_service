@@ -42,6 +42,38 @@ GRAPHICS_SOLR_PATH = 'https://api.adsabs.harvard.edu/v1/search/query'
 # This section configures this application to act as a client, for example
 # to query solr via adsws
 GRAPHICS_API_TOKEN = 'we will provide an api key token for this application'
+# Config for logging
+GRAPHICS_LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'default': {
+            'format': '%(levelname)s\t%(process)d '
+                      '[%(asctime)s]:\t%(message)s',
+            'datefmt': '%m/%d/%Y %H:%M:%S',
+        }
+    },
+    'handlers': {
+        'file': {
+            'formatter': 'default',
+            'level': 'INFO',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': '/tmp/graphics.log',
+        },
+        'console': {
+            'formatter': 'default',
+            'level': 'INFO',
+            'class': 'logging.StreamHandler'
+        },
+    },
+    'loggers': {
+        '': {
+            'handlers': ['file', 'console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    },
+}
 # Define the autodiscovery endpoint
 DISCOVERER_PUBLISH_ENDPOINT = '/resources'
 # Advertise its own route within DISCOVERER_PUBLISH_ENDPOINT
