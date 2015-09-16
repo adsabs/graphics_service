@@ -45,7 +45,6 @@ def get_graphics(bibcode):
         else:
             results = {
                 'query': 'failed', 'error': 'PostgreSQL problem (%s)' % error}
-
     if results and 'figures' in results:
         if len(results['figures']) == 0:
             # There are cases where an entry exists, but the 'figures'
@@ -62,10 +61,9 @@ def get_graphics(bibcode):
         display_figure = random.choice(results['figures'])
         results['pick'] = ''
         results['number'] = 0
-        if source == 'IOP':
-            results['header'] = 'Every image links to the ' + \
-              '<a href="http://www.astroexplorer.org/" target="_new">' + \
-              'IOP "Astronomy Image Explorer"</a> for more detail.'
+        if source in current_app.config.get('GRAPHICS_EXTSOURCES'):
+            header = current_app.config.get('GRAPHICS_HEADER').get(source,'')
+            results['header'] =  header
             try:
                 display_image = random.choice(display_figure['images'])
                 thumb_url = display_image['thumbnail']

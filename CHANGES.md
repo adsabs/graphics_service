@@ -1,3 +1,7 @@
+### 1.0.2
+
+* add more flexibility in displaying graphics from other external sources
+
 ### 1.0.1
 
 * Add AUTHOR.md, CONTRIBUTING.md, CHANGES.md
