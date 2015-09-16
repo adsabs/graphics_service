@@ -7,6 +7,7 @@ GRAPHICS_ENABLE_UPDATES = False
 # case of arXiv)
 GRAPHICS_PUBSETS = {
                    'IOP':['ApJ','ApJL','ApJS','AJ'],
+                   'Elsevier':['NewA'],
                    'arXiv': ['arXiv', 'acc-phys', 'adap-org', 'alg-geom',
                              'ao-sci', 'astro-ph', 'atom-ph', 'bayes-an',
                              'chao-dyn', 'chem-ph', 'cmp-lg', 'comp-gas',
@@ -15,6 +16,13 @@ GRAPHICS_PUBSETS = {
                              'math-ph', 'mtrl-th', 'nlin', 'nucl-ex', 'nucl-th',
                              'patt-sol', 'physics', 'plasm-ph', 'q-alg', 'q-bio',
                              'quant-ph', 'solv-int', 'supr-con']
+                  }
+# External graphics sources
+GRAPHICS_EXTSOURCES = ['IOP', 'Elsevier']
+# Some info for the external site
+GRAPHICS_HEADER = {
+                  'IOP':'Every image links to the <a href="http://www.astroexplorer.org/" target="_new">IOP "Astronomy Image Explorer"</a> for more detail.',
+                  'Elsevier':'Every image links to the article on <a href="http://www.sciencedirect.com" target="_new">ScienceDirect</a>'
                   }
 # Define the mapping to help retrieve full text files for a given identifier
 GRAPHICS_FULLTEXT_MAPS = {
@@ -27,6 +35,7 @@ GRAPHICS_BACK_DATA_FILE = {
 # These are the values to be stored as "source" in the graphics database
 GRAPHICS_SOURCE_NAMES = {
     'IOP': 'IOP',
+    'Elsevier':'Elsevier',
     'arXiv': 'arXiv',
 }
 # Work directory to store temporary data (e.g. for unpacking TAR files)

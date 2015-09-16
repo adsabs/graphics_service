@@ -32,7 +32,7 @@ def get_identifiers(bibstem, year, source):
         idtype = 'eid'
     else:
         q = 'bibstem:%s year:%s' % (bibstem, year)
-        fl= 'bibcode, identifier'
+        fl= 'bibcode, identifier, doi'
         idtype = 'identifier'
     solr_args = {'wt': 'json',
                  'q': q,
@@ -56,8 +56,9 @@ def get_identifiers(bibstem, year, source):
                           'arXiv' in i][0]
             except:
                 arx_id = None
+        doi = doc.get('doi',['NA'])[0]
         try:
-            ids.append({'bibcode': doc['bibcode'], 'arxid': arx_id})
+            ids.append({'bibcode': doc['bibcode'], 'arxid': arx_id, 'doi':doi})
         except:
             pass
     if source == 'arXiv' and bibstem != 'arXiv':
@@ -508,6 +509,108 @@ def manage_arXiv_graphics(ft_file, bibcode, arx_id, category, update=False, dryr
         except Exception, e:
             sys.stderr.write('Data commit failed for %s: %s\n'%(bibcode, e))
 
+    if not dryrun:
+        return len(figures)
+    else:
+        return figures
+
+def process_Elsevier_graphics(identifiers, force, dryrun=False):
+    """
+    For the set of identifiers supplied, retrieve the graphics data.
+    If force is false, skip a bibcode if already in the database. The list of
+    identifiers is a list of dictionaries because for all records we need the
+    bibcode (to check if a record already exists) and the arXiv ID, to find
+    the full text TAR archive
+    :param bibcodes:
+    :param force:
+    :return:
+    """
+    # Process the records submitted
+    nfigs = None
+    updates = []
+    new = []
+    for entry in identifiers:
+        resp = db.session.query(GraphicsModel).filter(
+            GraphicsModel.bibcode == entry['bibcode']).first()
+        if force and resp:
+            updates.append(entry)
+        elif not resp:
+            new.append(entry)
+        else:
+            continue
+    # First process the updates
+    for paper in updates:
+        nfigs = manage_Elsevier_graphics(paper, update=True, dryrun=dryrun)
+    # Next, process the new records
+    for paper in new:
+        try:
+            nfigs = manage_Elsevier_graphics(paper, dryrun=dryrun)
+        except Exception, e:
+            sys.stderr.write('Error processing %s (%s)\n'%(paper, e))
+            continue
+    return nfigs
+
+def manage_Elsevier_graphics(record, update=False, dryrun=False):
+    # If we're updating, grab the existing database entry
+    if update:
+        graphic = db.session.query(GraphicsModel).filter(
+            GraphicsModel.bibcode == bibcode).first()
+    else:
+        graphic = None
+    # URL templates for thumbnail images
+    thumbURL = "http://ars.els-cdn.com/content/image/%s"
+    queryURL = "http://api.elsevier.com/content/object/doi/%s"
+    figures = []
+    # Retrieve graphics info from Elsevier API
+    APIkey = current_app.config.get('ELSEVIER_API_KEY')
+    headers = {'Accept': 'application/json', 'X-ELS-APIKey': APIkey}
+    r = requests.get(queryURL % record.get('doi'), headers=headers)
+    try:
+        PII = r.json()['attachment-metadata-response']['coredata']['dc:identifier'].replace('PII:','')
+    except:
+        PII = None
+    # Retrieve information for all figures
+    try:
+        thumbs = [r for r in r.json()['attachment-metadata-response']['attachment'] if r['type'] == 'IMAGE-THUMBNAIL']
+    except:
+        thumbs = []
+    for thumb in thumbs:
+        fig_data = {}
+        images = []
+        fignr = re.sub("[^0-9]", "",thumb['ref'])
+        fig_data['figure_id'] = thumb['eid']
+        fig_data['figure_label'] = "Figure %s" % fignr
+        fig_data['figure_caption'] = ''
+        if PII:
+            highres = "http://www.sciencedirect.com/science/article/pii/%s" % PII
+        else:
+            highres = "http://dx.doi.org/%s" % record['doi']
+        image = {'image_id': thumb['eid'], 
+                 'thumbnail': thumbURL % thumb['eid'],
+                 'format': thumb['mimetype'].split('/')[1],
+                 'highres': highres}
+        fig_data['images'] = [image]
+        figures.append(fig_data)
+
+    if len(figures) > 0 and not dryrun:
+        graph_src = current_app.config.get('GRAPHICS_SOURCE_NAMES').get('Elsevier')
+        if update:
+            sys.stderr.write('Updating %s\n'%record['bibcode'])
+            graphic.source = graph_src
+            graphic.figures = figures
+            graphic.modtime = datetime.now()
+        else:
+            sys.stderr.write('Creating new record for %s\n'%record['bibcode'])
+            graphic = GraphicsModel(
+                bibcode=record['bibcode'],
+                doi=record['doi'],
+                source=graph_src,
+                eprint=False,
+                figures=figures,
+                modtime=datetime.now()
+            )
+            db.session.add(graphic)
+        db.session.commit()
     if not dryrun:
         return len(figures)
     else:

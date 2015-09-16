@@ -72,7 +72,11 @@ class UpdateDatabase(Command):
                     bibstem = identifier[4:13]
                     year    = identifier[:4]
                     source  = ""
-                    ident = {'bibcode': identifier}
+                    res = get_identifiers(bibstem, year, source)
+                    try:
+                        ident = [r for r in res if r['bibcode'] == identifier][0]
+                    except:
+                        ident = {'bibcode': identifier}
                 else:
                     bibstem = 'arXiv'
                     source  = 'arXiv'
