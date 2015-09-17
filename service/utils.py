@@ -3,6 +3,7 @@ import re
 import sys
 import shutil
 import commands
+from operator import itemgetter
 import requests
 from flask import current_app, request
 from client import client
@@ -554,7 +555,7 @@ def manage_Elsevier_graphics(record, update=False, dryrun=False):
     # If we're updating, grab the existing database entry
     if update:
         graphic = db.session.query(GraphicsModel).filter(
-            GraphicsModel.bibcode == bibcode).first()
+            GraphicsModel.bibcode == record['bibcode']).first()
     else:
         graphic = None
     # URL templates for thumbnail images
@@ -577,10 +578,14 @@ def manage_Elsevier_graphics(record, update=False, dryrun=False):
     for thumb in thumbs:
         fig_data = {}
         images = []
-        fignr = re.sub("[^0-9]", "",thumb['ref'])
+        try:
+            fignr = int(re.sub("[^0-9]", "",thumb['ref']))
+        except:
+            fignr = re.sub("[^0-9]", "",thumb['ref'])
         fig_data['figure_id'] = thumb['eid']
         fig_data['figure_label'] = "Figure %s" % fignr
         fig_data['figure_caption'] = ''
+        fig_data['figure_number'] = fignr
         if PII:
             highres = "http://www.sciencedirect.com/science/article/pii/%s" % PII
         else:
@@ -591,7 +596,7 @@ def manage_Elsevier_graphics(record, update=False, dryrun=False):
                  'highres': highres}
         fig_data['images'] = [image]
         figures.append(fig_data)
-
+    figures = sorted(figures, key=itemgetter('figure_number'))
     if len(figures) > 0 and not dryrun:
         graph_src = current_app.config.get('GRAPHICS_SOURCE_NAMES').get('Elsevier')
         if update:
