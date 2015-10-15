@@ -6,7 +6,6 @@ PROJECT_HOME = os.path.abspath(
 sys.path.append(PROJECT_HOME)
 from flask.ext.testing import TestCase
 import app
-import timeout_decorator
 import time
 
 @timeout_decorator.timeout(2)
@@ -40,6 +39,7 @@ class TestFileOps(TestCase):
 
     def test_timeout(self):
         '''Test if timeout decorator works properly'''
+        import timeout_decorator
         try:
             res = test_timeout(1)
         except timeout_decorator.timeout_decorator.TimeoutError:
