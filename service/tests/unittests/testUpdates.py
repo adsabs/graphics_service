@@ -29,6 +29,7 @@ def get_testdata():
     )
     return g
  
+@unittest.skip("skip update testing (IOP)")
 class TestIOP(TestCase):
 
     '''Check IOP processing'''
@@ -106,6 +107,8 @@ class TestIOP(TestCase):
             os.remove(map_file)
         except OSError:
            pass
+
+@unittest.skip("skip update testing (arXiv)")
 class TestARXIV(TestCase):
 
     '''Check arXiv processing'''
