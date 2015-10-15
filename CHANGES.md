@@ -1,3 +1,7 @@
+### 1.0.3
+
+* skip tests that are not necessary for micro service part
+
 ### 1.0.2
 
 * add more flexibility in displaying graphics from other external sources
