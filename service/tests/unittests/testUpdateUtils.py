@@ -14,6 +14,7 @@ def test_timeout(s):
     time.sleep(s)
     return s
 
+@unittest.skip("skip update testing (file operations)")
 class TestFileOps(TestCase):
 
     '''Check if config has necessary entries'''
