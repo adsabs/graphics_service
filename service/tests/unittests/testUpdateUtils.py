@@ -8,6 +8,7 @@ from flask.ext.testing import TestCase
 import app
 import time
 import timeout_decorator
+import unittest
 
 @timeout_decorator.timeout(2)
 def test_timeout(s):
