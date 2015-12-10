@@ -67,7 +67,7 @@ GRAPHICS_LOGGING = {
             'formatter': 'default',
             'level': 'INFO',
             'class': 'logging.handlers.TimedRotatingFileHandler',
-            'filename': '/tmp/graphics.log',
+            'filename': '/tmp/graphics_app.log',
         },
         'console': {
             'formatter': 'default',
