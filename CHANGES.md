@@ -1,3 +1,7 @@
+### 1.0.4
+
+* consolidate requirements and freeze Pillow, python-magic and libmagic versions
+
 ### 1.0.3
 
 * skip tests that are not necessary for micro service part
