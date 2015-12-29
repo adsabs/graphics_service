@@ -13,5 +13,8 @@ requests>=2.7.0
 mock
 coveralls
 httpretty
-flask-consulate
+libmagic==1.0
+python-magic==0.4.6
+Pillow==2.9.0
 timeout-decorator
+flask-consulate
