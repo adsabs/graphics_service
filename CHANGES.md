@@ -1,3 +1,7 @@
+### 1.0.5
+
+* remove dependencies on Consul
+
 ### 1.0.4
 
 * consolidate requirements and freeze Pillow, python-magic and libmagic versions
