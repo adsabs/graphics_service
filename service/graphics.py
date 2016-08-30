@@ -29,6 +29,7 @@ def get_graphics(bibcode):
             GraphicsModel.bibcode == bibcode).one()
         results = json.loads(json.dumps(resp, cls=AlchemyEncoder))
         results['query'] = 'OK'
+        db.session.commit()
     except NoResultFound:
         results = {
             'query': 'failed',
