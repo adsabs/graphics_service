@@ -1,3 +1,7 @@
+### 1.0.6
+
+* commit after database queries
+
 ### 1.0.5
 
 * remove dependencies on Consul
