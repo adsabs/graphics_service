@@ -1,3 +1,7 @@
+### 1.0.7
+
+* SQLALCHEMY_COMMIT_ON_TEARDOWN = True (in config)
+
 ### 1.0.6
 
 * commit after database queries

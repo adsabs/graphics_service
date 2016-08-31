@@ -1,6 +1,8 @@
 GRAPHICS_SECRET_KEY = 'this should be changed'
 GRAPHICS_INCLUDE_ARXIV = False
 SQLALCHEMY_BINDS = {}
+# Proper handling of database connections
+SQLALCHEMY_COMMIT_ON_TEARDOWN = True
 GRAPHICS_ENABLE_UPDATES = False
 # Define sets for which to obtain graphics data for graphics database
 # The key defines the set and the values are journals (or categories, in the
