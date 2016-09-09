@@ -1,3 +1,7 @@
+### 1.0.8
+
+* Maintenance update
+
 ### 1.0.7
 
 * SQLALCHEMY_COMMIT_ON_TEARDOWN = True (in config)
