@@ -23,7 +23,7 @@ GRAPHICS_PUBSETS = {
 GRAPHICS_EXTSOURCES = ['IOP', 'Elsevier']
 # Some info for the external site
 GRAPHICS_HEADER = {
-                  'IOP':'Every image links to the <a href="http://www.astroexplorer.org/" target="_new">IOP "Astronomy Image Explorer"</a> for more detail.',
+                  'IOP':'Every image links to the <a href="http://www.astroexplorer.org/" target="_new">AAS "Astronomy Image Explorer"</a> for more detail.',
                   'Elsevier':'Every image links to the article on <a href="http://www.sciencedirect.com" target="_new">ScienceDirect</a>'
                   }
 # Define the mapping to help retrieve full text files for a given identifier
