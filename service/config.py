@@ -21,7 +21,7 @@ GRAPHICS_PUBSETS = {
                              'quant-ph', 'solv-int', 'supr-con']
                   }
 # External graphics sources
-GRAPHICS_EXTSOURCES = ['IOP', 'Elsevier']
+GRAPHICS_EXTSOURCES = ['IOP', 'Elsevier', 'EDP']
 # Some info for the external site
 GRAPHICS_HEADER = {
                   'EDP':'Every image links to the article on <a href="http://www.aanda.org/" target="_new">Astronomy &amp; Astrophysics</a>',
