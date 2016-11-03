@@ -17,3 +17,4 @@ libmagic==1.0
 python-magic==0.4.6
 Pillow==2.9.0
 timeout-decorator
+boto3
