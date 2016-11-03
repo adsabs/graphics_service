@@ -1,3 +1,7 @@
+### 1.0.10
+
+* maintenance update
+
 ### 1.0.9
 
 * graphics for A&A
