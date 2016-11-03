@@ -1,8 +1,10 @@
 import os
 import re
 import sys
+import glob
 import shutil
 import commands
+import urllib
 from operator import itemgetter
 import requests
 from flask import current_app, request
@@ -12,6 +14,7 @@ import file_ops
 from datetime import datetime
 from invenio_tools import extract_captions, prepare_image_data,\
     extract_context, remove_dups
+from aws_tools import get_boto_session
 
 requests.packages.urllib3.disable_warnings()
 
@@ -620,3 +623,147 @@ def manage_Elsevier_graphics(record, update=False, dryrun=False):
         return len(figures)
     else:
         return figures
+
+def process_EDP_graphics(identifiers, force, dryrun=False):
+    """
+    For the set of identifiers supplied, retrieve the graphics data.
+    If force is false, skip a bibcode if already in the database. The list of
+    identifiers is a list of dictionaries because for all records we need the
+    bibcode (to check if a record already exists) and the arXiv ID, to find
+    the full text TAR archive
+    :param bibcodes:
+    :param force:
+    :return:
+    """
+    # Create the mapping from bibcode to full text location
+    bibcode2fulltext = {}
+    map_file = current_app.config.get('GRAPHICS_FULLTEXT_MAPS').get('EDP')
+    with open(map_file) as fh_map:
+        for line in fh_map:
+            try:
+                bibcode, ft_file, source = line.strip().split('\t')
+                if ft_file[-3:].lower() == 'xml':
+                    bibcode2fulltext[bibcode] = ft_file
+            except:
+                continue
+    # Get source name
+    src = current_app.config.get('GRAPHICS_SOURCE_NAMES').get('EDP')
+    # Now process the records submitted
+    nfigs = None
+    updates = []
+    new = []
+    for entry in identifiers:
+        resp = db.session.query(GraphicsModel).filter(
+            GraphicsModel.bibcode == entry['bibcode']).first()
+        if force and resp:
+            updates.append(entry)
+        elif not resp:
+            new.append(entry)
+        else:
+            continue
+    # First process the updates
+    nfigs = None
+    for paper in updates:
+        # Get the full text for this article
+        fulltext = bibcode2fulltext.get(paper['bibcode'], None)
+        if not fulltext:
+            # No full text file, skip
+            sys.stderr.write('No full text found for %s (update)\n' % paper['bibcode'])
+            continue
+        try:
+             nfigs = manage_EDP_graphics(paper, fulltext, update=True, dryrun=dryrun)
+        except Exception, e:
+            sys.stderr.write('Error processing update %s (%s)\n'%(paper['bibcocde'], e))
+            continue
+    # Next, process the new records
+    for paper in new:
+        # Get the full text for this article
+        fulltext = bibcode2fulltext.get(paper['bibcode'], None)
+        if not fulltext:
+            # No full text file, skip
+            sys.stderr.write('No full text found for %s (new record)\n' % paper['bibcode'])
+            continue
+        try:
+            nfigs = manage_EDP_graphics(paper, fulltext, dryrun=dryrun)
+        except Exception, e:
+            sys.stderr.write('Error processing new %s (%s)\n'%(paper['bibcode'], e))
+            continue
+    return nfigs
+
+def manage_EDP_graphics(record, ft_file, update=False, dryrun=False):
+    # If we're updating, grab the existing database entry
+    if update:
+        graphic = db.session.query(GraphicsModel).filter(
+            GraphicsModel.bibcode == record['bibcode']).first()
+    else:
+        graphic = None
+    # Get the article identifier from the full text file name
+    identifier = os.path.basename(ft_file).replace('.xml','')
+    # and get the location of the full text files
+    srcdir = current_app.config.get('GRAPHICS_GRAPHICS_LOCATION').get('EDP')
+    # Get the JPEG files in the source directory
+    thumbs = glob.glob('%s/%s/*.jpg'%(srcdir, identifier))
+    # Filter out any images with 'small' in the file name
+    # and that don't have 'fig' in the file name  
+    thumbs = [t for t in thumbs if t.lower().find('fig') > -1 and t.lower().find('small') == -1]
+    # On S3, thumbnails go to
+    #  <bucket>/seri/A+A/<volume>/<article ID>
+    bucket = current_app.config.get('GRAPHICS_AWS_S3_BUCKET')
+    volno = record['bibcode'][9:13].replace('.','0')
+    thumb_bucket = "seri/A+A/%s/%s" % (volno, identifier)
+    # Create the S3 session and copy over the files
+    client = get_boto_session().client('s3')
+    # Currently we just process JPEG files
+    mimetype = 'image/jpeg'
+    # Copy files over to S3
+    figures = []
+    for thumb in thumbs:
+        fig_data = {}
+        images = []
+        # Try to distill the figure number from file name
+        try:
+            fignr = re.sub('^.*fig(\d+).*',r'\1',os.path.basename(thumb))
+        except:
+            fignr = 0
+        fig_data['figure_id'] = re.sub('^(.*)\..*',r'\1',os.path.basename(thumb))
+        fig_data['figure_label'] = "Figure %s" % fignr
+        fig_data['figure_caption'] = ''
+        fig_data['figure_number'] = fignr
+        highres = "http://dx.doi.org/%s" % record['doi']
+        # S3 URL for thumbnail is:
+        # https://s3.amazonaws.com/adsabs-thumbnails/seri/A%2BA/0595/aa29175-16/aa29175-16-fig1.jpg
+        key = "%s/%s" % (thumb_bucket, os.path.basename(thumb))
+        thumbURL = "%s/%s/%s" % (current_app.config.get('GRAPHICS_AWS_S3_URL'), bucket, urllib.quote(key))
+        image = {'image_id': re.sub('^(.*)\..*',r'\1',os.path.basename(thumb)),
+                 'thumbnail': thumbURL,
+                 'format': mimetype.split('/')[1],
+                 'highres': highres}
+        fig_data['images'] = [image]
+        figures.append(fig_data)
+        # Upload the image to S3
+        try:
+            data = open(thumb, 'rb')
+        except Exception, e:
+            sys.stderr.write('Error loading image data for %s: %s\n' % (thumb, str(e)))
+            continue
+        client.put_object(Key=key, Bucket=bucket ,Body=data, ACL='public-read', ContentType=mimetype)
+    figures = sorted(figures, key=itemgetter('figure_number'))
+    if len(figures) > 0 and not dryrun:
+        graph_src = current_app.config.get('GRAPHICS_SOURCE_NAMES').get('EDP')
+        if update:
+            sys.stderr.write('Updating %s\n'%record['bibcode'])
+            graphic.source = graph_src
+            graphic.figures = figures
+            graphic.modtime = datetime.now()
+        else:
+            sys.stderr.write('Creating new record for %s\n'%record['bibcode'])
+            graphic = GraphicsModel(
+                bibcode=record['bibcode'],
+                doi=record['doi'],
+                source=graph_src,
+                eprint=False,
+                figures=figures,
+                modtime=datetime.now()
+            )
+            db.session.add(graphic)
+        db.session.commit()
