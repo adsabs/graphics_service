@@ -706,6 +706,7 @@ def manage_EDP_graphics(record, ft_file, update=False, dryrun=False):
     # Filter out any images with 'small' in the file name
     # and that don't have 'fig' in the file name  
     thumbs = [t for t in thumbs if t.lower().find('fig') > -1 and t.lower().find('small') == -1]
+    #thumbs = [t for t in thumbs if t.lower().find('small') > -1]
     # On S3, thumbnails go to
     #  <bucket>/seri/A+A/<volume>/<article ID>
     bucket = current_app.config.get('GRAPHICS_AWS_S3_BUCKET')
@@ -722,7 +723,7 @@ def manage_EDP_graphics(record, ft_file, update=False, dryrun=False):
         images = []
         # Try to distill the figure number from file name
         try:
-            fignr = re.sub('^.*fig(\d+).*',r'\1',os.path.basename(thumb))
+            fignr = int(re.sub('^.*fig(\d+).*',r'\1',os.path.basename(thumb)))
         except:
             fignr = 0
         fig_data['figure_id'] = re.sub('^(.*)\..*',r'\1',os.path.basename(thumb))
