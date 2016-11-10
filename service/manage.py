@@ -20,7 +20,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = app.config[
 
 # By default the harvester looks at the current and previous year
 now = datetime.now()
-default_year = "%s-%s" % (now.year - 1, now.year)
+default_year = "%s-%s" % (now.year - 1, now.year + 1)
 # We will allow both arXiv categories and their ADS bibstem equivalents
 # Create mappings in both directions
 categories = app.config.get('GRAPHICS_PUBSETS').get('arXiv')
