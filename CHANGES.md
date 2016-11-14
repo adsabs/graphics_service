@@ -1,3 +1,7 @@
+### 1.0.11
+
+* graphics for arXiv
+
 ### 1.0.10
 
 * maintenance update

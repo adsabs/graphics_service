@@ -390,7 +390,7 @@ def manage_arXiv_graphics(ft_file, bibcode, arx_id, category, update=False, dryr
     else:
         graphic = None
     # First get lists of (La)TeX and image files
-    tex_files, img_files, xdir = file_ops.untar(ft_file)
+    tex_files, img_files, xdir = file_ops.untar(ft_file, bibcode)
     # If we didn't find any image files, skip
     if len(img_files) == 0:
         return
@@ -423,8 +423,17 @@ def manage_arXiv_graphics(ft_file, bibcode, arx_id, category, update=False, dryr
             extracted_image_data.extend((extract_context(tex_file,
                                                          cleaned_image_data)))
     extracted_image_data = remove_dups(extracted_image_data)
+    # For those images whereno metadata was captured, keep them with
+    # empty strings
+    try:
+        skipped_images = [i for i in converted_images if i not in [e[0] for e in extracted_image_data]]
+    except:
+        skipped_images = converted_images
+    if len(skipped_images) > 0:
+        extracted_image_data += [(im,'','',[]) for im in skipped_images]
     fid = 1
     source2target = {}
+    source2AWS = {}
     for item in extracted_image_data:
         if not os.path.exists(item[0]) or not item[0].strip():
             continue
@@ -443,6 +452,11 @@ def manage_arXiv_graphics(ft_file, bibcode, arx_id, category, update=False, dryr
             subdir,
             eprdir,
             figure_id)
+        source2AWS[item[0]] = "seri/arXiv/%s/%s/%s/%s.png" % (
+            category,
+            subdir,
+            eprdir,
+            figure_id)
         fig_data['figure_id'] = figure_id
         try:
             fig_data['figure_label'] = item[2].encode('ascii','ignore')
@@ -453,14 +467,10 @@ def manage_arXiv_graphics(ft_file, bibcode, arx_id, category, update=False, dryr
         except:
             fig_data['figure_caption'] = ''
         image_url = "http://arxiv.org/abs/%s" % arx_id.replace('arXiv:','')
-        thumb_url = "%s/%s/%s/%s/%s.png/%s" % (
-            current_app.config.get('GRAPHICS_BASE_URL'),
-            category,
-            subdir,
-            eprdir,
-            figure_id,
-            current_app.config.get('GRAPHICS_THMB_PAR'),
-        )
+        thumb_url = "%s/%s/%s" % (
+            current_app.config.get('GRAPHICS_AWS_S3_URL'),
+            current_app.config.get('GRAPHICS_AWS_S3_BUCKET'),
+            source2AWS[item[0]])
         fig_data['images'] = [
             {
                 'image_id': fid,
@@ -473,15 +483,31 @@ def manage_arXiv_graphics(ft_file, bibcode, arx_id, category, update=False, dryr
         fid += 1
     # Now it is time to move the PNGs to their final location, renaming
     # them in the process
+    # 1. Store them on a local server
+    # 2. Store them on AWS S3
+    # Create the S3 session and copy over the files
+    client = get_boto_session().client('s3')
+    # Currently we just process PNG files
+    mimetype = 'image/png'
+    bucket = current_app.config.get('GRAPHICS_AWS_S3_BUCKET')
     for source, target in source2target.items():
+        # Copy image file from TMP location to final location on disk
         target_dir, fname = os.path.split(target)
         if not os.path.exists(target_dir):
             cmmd = 'mkdir -p %s' % target_dir
             commands.getoutput(cmmd)
         shutil.copy(source, target)
+        # Upload image file to S3
+        key = source2AWS[source]
+        try:
+            data = open(source, 'rb')
+        except Exception, e:
+            sys.stderr.write('Error loading image data for %s: %s\n' % (source, str(e)))
+            continue
+        client.put_object(Key=key, Bucket=bucket ,Body=data, ACL='public-read', ContentType=mimetype)
     # Now it's time to clean up stuff we've extracted
     TMP_DIR = current_app.config.get('GRAPHICS_TMP_DIR')
-    extract_dir = "%s/%s" % (TMP_DIR, os.path.basename(ft_file).split('.')[0])
+    extract_dir = "%s/%s" % (TMP_DIR, bibcode)
     try:
         shutil.rmtree(extract_dir)
     except:
