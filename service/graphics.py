@@ -46,6 +46,7 @@ def get_graphics(bibcode):
         else:
             results = {
                 'query': 'failed', 'error': 'PostgreSQL problem (%s)' % err}
+    print results
     if results and 'figures' in results:
         if len(results['figures']) == 0:
             # There are cases where an entry exists, but the 'figures'
@@ -101,7 +102,7 @@ def get_graphics(bibcode):
                     ADS_image_url % (
                         bibcode.replace('&', '%26'), figure['page'] - 1))
         elif source.upper() == 'ARXIV' \
-                and current_app.config.get('GRAPHICSINCLUDE_ARXIV'):
+                and current_app.config.get('GRAPHICS_INCLUDE_ARXIV'):
             results['header'] = 'Images extracted from the arXiv e-print'
             try:
                 display_image = random.choice(display_figure['images'])
@@ -115,7 +116,6 @@ def get_graphics(bibcode):
                 for image in images:
                     thumb_url = image['thumbnail']
                     highr_url = image['highres']
-                    lowrs_url = image['lowres']
         elif source.upper() == 'TEST':
             results['pick'] = display_figure
             return results

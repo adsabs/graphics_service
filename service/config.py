@@ -1,5 +1,5 @@
 GRAPHICS_SECRET_KEY = 'this should be changed'
-GRAPHICS_INCLUDE_ARXIV = False
+GRAPHICS_INCLUDE_ARXIV = True
 SQLALCHEMY_BINDS = {}
 # Proper handling of database connections
 SQLALCHEMY_COMMIT_ON_TEARDOWN = True
