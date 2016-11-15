@@ -46,7 +46,7 @@ def get_graphics(bibcode):
         else:
             results = {
                 'query': 'failed', 'error': 'PostgreSQL problem (%s)' % err}
-    print results
+
     if results and 'figures' in results:
         if len(results['figures']) == 0:
             # There are cases where an entry exists, but the 'figures'

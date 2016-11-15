@@ -461,7 +461,9 @@ def manage_arXiv_graphics(ft_file, bibcode, arx_id, category, update=False, dryr
         try:
             fig_data['figure_label'] = item[2].encode('ascii','ignore')
         except:
-            fig_data['figure_label'] = ''
+            fig_data['figure_label'] = '' 
+        if not fig_data['figure_label']:
+            fig_data['figure_label'] = 'figure %s' % fid
         try:
             fig_data['figure_caption'] = item[1].encode('ascii','ignore')
         except:
