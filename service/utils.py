@@ -31,7 +31,7 @@ def get_identifiers(bibstem, year, source):
     # later on the actual bibstem (if this is other than "arXiv")
     if source == 'arXiv':
 #        q = 'pub:"ArXiv e-prints" year:%s' % year
-        q = 'bibstem:arXiv year:%s' % year
+        q = 'bibstem:arXiv year:%s arxiv_class:astrophysics' % year
         fl= 'bibcode, eid'
         idtype = 'eid'
     else:
