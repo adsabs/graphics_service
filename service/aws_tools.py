@@ -8,7 +8,7 @@ def get_boto_session():
     :return: boto3.session instance
     """
     return Session(
-        aws_access_key_id=current_app.config.get('AWS_ACCESS_KEY'),
-        aws_secret_access_key=current_app.config.get('AWS_SECRET_KEY'),
-        region_name=current_app.config.get('AWS_REGION')
+        aws_access_key_id=current_app.config.get('GRAPHICS_AWS_ACCESS_KEY'),
+        aws_secret_access_key=current_app.config.get('GRAPHICS_AWS_SECRET_KEY'),
+        region_name=current_app.config.get('GRAPHICS_AWS_REGION')
     )
