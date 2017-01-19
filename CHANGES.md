@@ -1,3 +1,7 @@
+### 1.0.12
+
+* add figure type for AAS journals
+
 ### 1.0.11
 
 * graphics for arXiv
