@@ -47,7 +47,6 @@ def get_identifiers(bibstem, year, source):
     response = client().get(
         current_app.config.get("GRAPHICS_SOLR_PATH"),
         params=solr_args, headers=headers)
-
     if response.status_code != 200:
         return []
     resp = response.json()
@@ -209,6 +208,13 @@ def manage_IOP_graphics(fulltext, bibcode, DOI, source, id2thumb,
         images = []
         id = amat.group('figID')
         fg = amat.group('figure')
+        figtype = 'regular'
+        try:
+            rest = amat.group('rest')
+            if rest.find('fig-type="interactive"') > -1:
+                figtype = 'interactive'
+        except:
+            pass
         lm = lbl_pat.search(fg)
         try:
             label = lm.group('label')
@@ -223,6 +229,7 @@ def manage_IOP_graphics(fulltext, bibcode, DOI, source, id2thumb,
         fig_data['figure_id'] = id
         fig_data['figure_label'] = label
         fig_data['figure_caption'] = caption
+        fig_data['figure_type'] = figtype
         cs = 0
         imat = thumb_pat.search(fg, cs)
         done = []
