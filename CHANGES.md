@@ -1,3 +1,7 @@
+### 1.0.13
+
+* requirements.txt update and cleanup
+
 ### 1.0.12
 
 * add figure type for AAS journals
