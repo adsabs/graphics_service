@@ -26,6 +26,7 @@ GRAPHICS_EXTSOURCES = ['IOP', 'Elsevier', 'EDP']
 GRAPHICS_HEADER = {
                   'EDP':'Every image links to the article on <a href="http://www.aanda.org/" target="_new">Astronomy &amp; Astrophysics</a>',
                   'IOP':'Every image links to the <a href="http://www.astroexplorer.org/" target="_new">AAS "Astronomy Image Explorer"</a> for more detail.',
+                  'IOPscience':'Every image links to the article on <a href="http://iopscience.iop.org/" target="_new">IOPscience</a>',
                   'Elsevier':'Every image links to the article on <a href="http://www.sciencedirect.com" target="_new">ScienceDirect</a>'
                   }
 # Define the mapping to help retrieve full text files for a given identifier

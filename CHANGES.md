@@ -1,3 +1,7 @@
+### 1.0.14
+
+* update of display header info
+
 ### 1.0.13
 
 * requirements.txt update and cleanup

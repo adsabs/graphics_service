@@ -64,6 +64,9 @@ def get_graphics(bibcode):
         results['pick'] = ''
         results['number'] = 0
         if source in current_app.config.get('GRAPHICS_EXTSOURCES'):
+            # Non-AAS journals link to IOPscience, rather than AIE
+            if source == "IOP" and bibcode[4:9] not in ['ApJ..','ApJS.','AJ...']:
+                source = "IOPscience"
             header = current_app.config.get('GRAPHICS_HEADER').get(source,'')
             results['header'] =  header
             try:
