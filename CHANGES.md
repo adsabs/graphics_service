@@ -1,3 +1,7 @@
+### 1.0.15
+
+* ADS microservice normalization: implementation adsmutils, py.test
+
 ### 1.0.14
 
 * update of display header info

@@ -1,10 +1,18 @@
 language: python
+
 python:
   - "2.7"
+
 install:
-  - pip install -r requirements.txt
+  - "pip install --upgrade setuptools pip"
+  - "pip install -U -r requirements.txt"
+  - "pip install -U -r dev-requirements.txt"
+
 script:
- - coverage run -p --source=. service/tests/run_tests.py
+  - "py.test"
+
 after_success:
- - coverage combine
- - coveralls
+  - "coveralls"
+
+notifications:
+  email: false

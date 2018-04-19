@@ -1,0 +1,8 @@
+[run]
+source = graphics_service
+omit = 
+    graphics_service/tests*
+
+[report]
+exclude_lines =
+    if __name__ == .__main__.:

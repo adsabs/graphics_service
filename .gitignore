@@ -17,7 +17,7 @@ develop-eggs
 pip-log.txt
 
 # Unit test / coverage reports
-.coverage*
+.coverage
 .tox
 
 #Translations
@@ -42,6 +42,7 @@ venv
 
 logs
 adsabs.log
+graphics_app.log
 #logging local configuration
 logging.conf
 
@@ -49,3 +50,4 @@ local_config.py
 run.py
 src
 tmp
+.cache

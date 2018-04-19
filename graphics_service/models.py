@@ -7,11 +7,13 @@ Created on Nov 2, 2014
 import simplejson as json
 from sqlalchemy import Column, Integer, String, DateTime, Boolean
 from sqlalchemy.ext.declarative import DeclarativeMeta
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.dialects import postgresql
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
+from flask import current_app
 
-db = SQLAlchemy()
-
+Base = declarative_base()
 
 class AlchemyEncoder(json.JSONEncoder):
 
@@ -35,9 +37,8 @@ class AlchemyEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self, obj)
 
 
-class GraphicsModel(db.Model):
+class GraphicsModel(Base):
     __tablename__ = 'graphics'
-    __bind_key__ = 'graphics'
     id = Column(Integer, primary_key=True)
     bibcode = Column(String, nullable=False, index=True)
     doi = Column(String)
@@ -45,3 +46,19 @@ class GraphicsModel(db.Model):
     eprint = Column(Boolean)
     figures = Column(postgresql.JSON)
     modtime = Column(DateTime)
+
+def execute_SQL_query(bibc):
+    with current_app.session_scope() as session:
+        resp = session.query(GraphicsModel).filter(
+             GraphicsModel.bibcode == bibc).one()
+        results = json.loads(json.dumps(resp, cls=AlchemyEncoder))
+        return results
+
+def get_graphics_record(bibcode):
+    try:
+        res = execute_SQL_query(bibcode)
+    except NoResultFound:
+        res = {'Error': 'Unable to get results!', 'Error Info': 'No database entry found for %s' % bibcode}
+    except Exception, err:
+        res = {'Error': 'Unable to get results!', 'Error Info': 'Graphics query failed for %s: %s'%(bibcode, err)}
+    return res
