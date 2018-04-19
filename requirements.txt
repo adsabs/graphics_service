@@ -7,6 +7,6 @@ SQLAlchemy==1.1.6
 Werkzeug==0.11.15
 alembic==0.8.9
 flask-discoverer==0.0.2
-psycopg2==2.6.2
+psycopg2==2.7.1
 requests==2.12.4
 simplejson==3.10.0
