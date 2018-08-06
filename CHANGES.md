@@ -1,3 +1,7 @@
+### 1.0.16
+ 
+* Enabled JSON stdout logging and HTTP connection pool
+ 
 ### 1.0.15
 
 * ADS microservice normalization: implementation adsmutils, py.test
