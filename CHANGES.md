@@ -1,3 +1,7 @@
+### 1.0.17
+
+* Updated adsmutils requirement
+ 
 ### 1.0.16
  
 * Enabled JSON stdout logging and HTTP connection pool
