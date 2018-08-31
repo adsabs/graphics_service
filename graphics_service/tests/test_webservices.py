@@ -14,7 +14,7 @@ class TestWebservices(TestCase):
 
     def create_app(self):
         '''Create the wsgi application'''
-        app_ = app.create_app()
+        app_ = app.create_app(SQLALCHEMY_DATABASE_URI=None)
         return app_
 
     def test_nonSpecificUrlRoutes(self):
