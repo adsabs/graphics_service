@@ -1,3 +1,7 @@
+### 1.0.18
+
+* graphics for OUP
+
 ### 1.0.17
 
 * Removed unnecessary requirements
