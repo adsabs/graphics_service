@@ -1,7 +1,7 @@
 LOG_STDOUT = True
 GRAPHICS_SECRET_KEY = 'this should be changed'
 # External graphics sources
-GRAPHICS_EXTSOURCES = ['IOP', 'Elsevier', 'EDP', 'OUP', 'APS']
+GRAPHICS_EXTSOURCES = ['IOP', 'Elsevier', 'EDP', 'OUP', 'APS', 'AnnRev']
 # Some info for the external site
 GRAPHICS_HEADER = {
                   'EDP':'Every image links to the article on <a href="http://www.aanda.org/" target="_new">Astronomy &amp; Astrophysics</a>',
@@ -9,7 +9,8 @@ GRAPHICS_HEADER = {
                   'IOP':'Every image links to the <a href="http://www.astroexplorer.org/" target="_new">AAS "Astronomy Image Explorer"</a> for more detail.',
                   'IOPscience':'Every image links to the article on <a href="http://iopscience.iop.org/" target="_new">IOPscience</a>',
                   'Elsevier':'Every image links to the article on <a href="http://www.sciencedirect.com" target="_new">ScienceDirect</a>',
-                  'APS': 'Every image links to the article on <a href="https://journals.aps.org/" target="_new">Physical Review Journals</a>'
+                  'APS': 'Every image links to the article on <a href="https://journals.aps.org/" target="_new">Physical Review Journals</a>',
+                  'AnnRev': 'Every image links to the article on <a href="https://www.annualreviews.org/action/showPublications" target="_new">Annual Reviews</a>'
                   }
 #
 GRAPHICS_INCLUDE_ARXIV = True
