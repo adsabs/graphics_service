@@ -1,3 +1,7 @@
+### 1.0.22
+
+* version update for psycopg2 to 2.8.3 
+
 ### 1.0.21
 
 * graphics for Annual Reviews
