@@ -1,3 +1,7 @@
+### 1.0.23
+
+* Maintenance release: fix for alembic upgrade head
+
 ### 1.0.22
 
 * version update for psycopg2 to 2.8.3 
