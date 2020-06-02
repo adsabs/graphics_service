@@ -1,5 +1,4 @@
 LOG_STDOUT = True
-GRAPHICS_SECRET_KEY = 'this should be changed'
 # External graphics sources
 GRAPHICS_EXTSOURCES = ['IOP', 'Elsevier', 'EDP', 'OUP', 'APS', 'AnnRev']
 # Some info for the external site
