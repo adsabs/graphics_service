@@ -37,8 +37,7 @@ def get_graphics(bibcode):
         source = results.get('source', 'NA')
         results['ADSlink'] = []
         if not eprint:
-            results['figures'] = filter(
-                lambda a: a['figure_label'] != None, results['figures'])
+            results['figures'] = [a for a in results['figures'] if a['figure_label'] != None]
         display_figure = random.choice(results['figures'])
         results['pick'] = ''
         results['number'] = 0

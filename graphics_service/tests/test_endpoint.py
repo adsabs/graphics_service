@@ -1,4 +1,5 @@
 from __future__ import print_function
+from builtins import map
 import sys
 import os
 from flask_testing import TestCase
@@ -55,9 +56,9 @@ class TestExpectedResults(TestCase):
         bc = Column(Boolean)
         jc = Column(postgresql.JSON)
         dc = Column(DateTime)
-        cols_expect = map(
+        cols_expect = list(map(
             type, [ic.type, sc.type, sc.type, sc.type, bc.type,
-                   jc.type, dc.type])
+                   jc.type, dc.type]))
         self.assertEqual([type(c.type)
                           for c in GraphicsModel.__table__.columns],
                          cols_expect)
