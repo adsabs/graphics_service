@@ -1,3 +1,4 @@
+from __future__ import print_function
 import sys
 import os
 from flask_testing import TestCase
@@ -112,7 +113,7 @@ class TestExpectedResults(TestCase):
         r = self.client.get(url)
         self.assertTrue(r.status_code == 200)
         expected = {u'Error Info': u'No database entry found for foo', u'Error': u'Unable to get results!'}
-        print r.json
+        print(r.json)
         self.assertTrue(r.json == expected)
 
     @mock.patch('graphics_service.models.execute_SQL_query', return_value={'Error': 'error', 'Error Info': 'info'})

@@ -3,13 +3,14 @@ Created on Nov 2, 2014
 
 @author: ehenneken
 '''
+from __future__ import absolute_import
 import sys
 import os
 import simplejson as json
 import random
 from flask import current_app
 #from models import AlchemyEncoder, GraphicsModel
-from models import get_graphics_record
+from .models import get_graphics_record
 #from sqlalchemy.orm.exc import NoResultFound
 
 thumb_link = '<a href="%s" target="_new" border=0>' + \
