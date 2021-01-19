@@ -59,6 +59,6 @@ def get_graphics_record(bibcode):
         res = execute_SQL_query(bibcode)
     except NoResultFound:
         res = {'Error': 'Unable to get results!', 'Error Info': 'No database entry found for %s' % bibcode}
-    except Exception, err:
+    except Exception as err:
         res = {'Error': 'Unable to get results!', 'Error Info': 'Graphics query failed for %s: %s'%(bibcode, err)}
     return res

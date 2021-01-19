@@ -1,7 +1,8 @@
+from __future__ import absolute_import
 from flask import current_app
 from flask_restful import Resource
 from flask_discoverer import advertise
-from graphics import get_graphics
+from .graphics import get_graphics
 import time
 
 class Graphics(Resource):
