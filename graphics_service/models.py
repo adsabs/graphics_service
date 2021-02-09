@@ -45,6 +45,8 @@ class GraphicsModel(Base):
     source = Column(String)
     eprint = Column(Boolean)
     figures = Column(postgresql.JSON)
+    thumbnails = Column(postgresql.ARRAY(String), default=[])
+    baseurl = Column(String)
     modtime = Column(DateTime)
 
 def execute_SQL_query(bibc):

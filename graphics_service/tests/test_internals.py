@@ -52,7 +52,9 @@ class TestUtils(TestCase):
                 modtime=datetime.now()
             )
         results = json.loads(json.dumps(g, cls=AlchemyEncoder))
-        expected = {'modtime': None, 'bibcode': 'bibcode', 'source': 'TEST', 'doi': 'DOI', 'figures': [], 'eprint': False, 'id': None} 
+        expected = {'modtime': None, 'bibcode': 'bibcode', 'thumbnails': None,
+                    'baseurl': None, 'source': 'TEST', 'doi': 'DOI', 'figures': [],
+                    'eprint': False, 'id': None}
         self.assertTrue(results==expected)
 
 class TestLocalConfig(TestCase):

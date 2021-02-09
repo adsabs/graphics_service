@@ -55,10 +55,12 @@ class TestExpectedResults(TestCase):
         sc = Column(String)
         bc = Column(Boolean)
         jc = Column(postgresql.JSON)
+        tc = Column(postgresql.ARRAY(String))
+        uc = Column(String)
         dc = Column(DateTime)
         cols_expect = list(map(
             type, [ic.type, sc.type, sc.type, sc.type, bc.type,
-                   jc.type, dc.type]))
+                   jc.type, tc.type, uc.type, dc.type]))
         self.assertEqual([type(c.type)
                           for c in GraphicsModel.__table__.columns],
                          cols_expect)
