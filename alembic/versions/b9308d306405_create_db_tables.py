@@ -1,7 +1,7 @@
 """Create db tables
 
 Revision ID: b9308d306405
-Revises: c36480cd22db
+Revises: 437251c0dc94
 Create Date: 2021-02-05 15:18:06.547834
 
 """
@@ -11,7 +11,7 @@ from sqlalchemy.dialects import postgresql
 
 # revision identifiers, used by Alembic.
 revision = 'b9308d306405'
-down_revision = 'c36480cd22db'
+down_revision = '437251c0dc94'
 branch_labels = None
 depends_on = None
 
