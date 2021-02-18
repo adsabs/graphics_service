@@ -30,7 +30,7 @@ pip-log.txt
 include
 lib
 man
-venv
+venv*
 
 # Mac specific files
 .DS_Store
