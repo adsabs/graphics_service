@@ -29,14 +29,16 @@ def get_graphics(bibcode):
             return {'Error': 'Unable to get results!', 'Error Info': 'Failed to get thumbnail for display image for %s' % output['bibcode']}
         # Create this convoluted construct for backwards compatibility
         output['figures'] = []
+        n=1
         for t in results['thumbnails']:
             fig_data = {
-               'figure_label':'',
+               'figure_label':'Figure {0}'.format(n),
                'figure_caption':'',
                'figure_type':'',
                'images':[{'thumbnail':t[0], 'highres':t[1]}]
             } 
             output['figures'].append(fig_data)
+            n+=1
         if source in current_app.config.get('GRAPHICS_EXTSOURCES'):
             # Non-AAS journals link to IOPscience, rather than AIE
             if source == "IOP" and bibcode[4:9] not in ['ApJ..','ApJS.','AJ...']:

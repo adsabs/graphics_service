@@ -35,7 +35,7 @@ def get_testdata(figures = [], thumbnails=[], source='TEST'):
 class TestExpectedResults(TestCase):
     figure_data = [{'images': [{'thumbnail': 'http://fg1_thumb_url', 'highres':''}], 
                 'figure_caption': '', 
-                'figure_label': '', 
+                'figure_label': 'Figure 1', 
                 'figure_type': u''}]
 
     figure_data_no_thumb = [{"images": [{"image_id": "fg1", "format": "gif"}],
