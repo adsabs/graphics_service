@@ -34,7 +34,7 @@ def get_graphics(bibcode):
                'figure_label':'',
                'figure_caption':'',
                'figure_type':'',
-               'images':[{'thumbnail':t}]
+               'images':[{'thumbnail':t[0], 'highres':t[1]}]
             } 
             output['figures'].append(fig_data)
         if source in current_app.config.get('GRAPHICS_EXTSOURCES'):

@@ -19,7 +19,7 @@ import mock
 from datetime import datetime
 
 def get_testdata(figures = [], thumbnails=[], source='TEST'):
-    thumbs = [f['images'][0].get('thumbnail','') for f in figures]
+    thumbs = [(f['images'][0].get('thumbnail',''),f['images'][0].get('thumnail','')) for f in figures]
     g = GraphicsModel(
         bibcode='9999BBBBBVVVVQPPPPI',
         doi='DOI',
@@ -33,8 +33,7 @@ def get_testdata(figures = [], thumbnails=[], source='TEST'):
     return results
 
 class TestExpectedResults(TestCase):
-
-    figure_data = [{'images': [{'thumbnail': 'http://fg1_thumb_url'}], 
+    figure_data = [{'images': [{'thumbnail': 'http://fg1_thumb_url', 'highres':''}], 
                 'figure_caption': '', 
                 'figure_label': '', 
                 'figure_type': u''}]
