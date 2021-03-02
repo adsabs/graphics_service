@@ -1,4 +1,4 @@
-name: Python CI actions
+name: GitHub Actions CI
 
 on: [pull_request]
 
@@ -23,6 +23,6 @@ jobs:
 
     - name: Test with pytest
       run: |
-        pytest
+        py.test
 
     - run: coveralls
