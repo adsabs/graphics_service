@@ -18,26 +18,25 @@ import simplejson as json
 import mock
 from datetime import datetime
 
-def get_testdata(figures = [], source='TEST'):
+def get_testdata(figures = [], thumbnails=[], source='TEST'):
+    thumbs = [(f['images'][0].get('thumbnail',''),f['images'][0].get('thumnail','')) for f in figures]
     g = GraphicsModel(
         bibcode='9999BBBBBVVVVQPPPPI',
         doi='DOI',
         source=source,
         eprint=False,
         figures=figures,
+        thumbnails=thumbs,
         modtime=datetime.now()
     )
     results = json.loads(json.dumps(g, cls=AlchemyEncoder))
     return results
 
 class TestExpectedResults(TestCase):
-
-    figure_data = [{"images": [{"image_id": "fg1", "format": "gif",
-                            "thumbnail": "fg1_thumb_url", "highres":
-                            "fg1_highres_url"}],
-                "figure_caption": "Figure 1",
-                "figure_label": "Figure 1",
-                "figure_id": "fg1"}]
+    figure_data = [{'images': [{'thumbnail': 'http://fg1_thumb_url', 'highres':''}], 
+                'figure_caption': '', 
+                'figure_label': 'Figure 1', 
+                'figure_type': u''}]
 
     figure_data_no_thumb = [{"images": [{"image_id": "fg1", "format": "gif"}],
                 "figure_caption": "Figure 1",
@@ -74,7 +73,6 @@ class TestExpectedResults(TestCase):
         self.assertTrue(r.status_code == 200)
         self.assertTrue(r.json.get('figures') == self.figure_data)
         self.assertTrue(r.json.get('bibcode') == '9999BBBBBVVVVQPPPPI')
-        self.assertTrue(r.json.get('pick')['figure_label'] == 'Figure 1')
 
     @mock.patch('graphics_service.models.execute_SQL_query', return_value=get_testdata(figures=figure_data_no_thumb, source='IOP'))
     def test_query_no_thumbnail(self, mock_execute_SQL_query):
@@ -83,7 +81,7 @@ class TestExpectedResults(TestCase):
         url = url_for('graphics', bibcode='9999ApJ..VVVVQPPPPI')
         r = self.client.get(url)
         self.assertTrue(r.status_code == 200)
-        expected = {u'Error Info': u'Failed to get thumbnail for display image for 9999ApJ..VVVVQPPPPI', u'Error': u'Unable to get results!'}
+        expected = {u'Error Info': u'Failed to get thumbnail for display image for 9999BBBBBVVVVQPPPPI', u'Error': u'Unable to get results!'}
         self.assertTrue(r.json == expected)
 
     @mock.patch('graphics_service.models.execute_SQL_query', return_value=get_testdata(figures=figure_data_no_thumb, source='ARXIV'))
@@ -93,7 +91,7 @@ class TestExpectedResults(TestCase):
         url = url_for('graphics', bibcode='9999ApJ..VVVVQPPPPI')
         r = self.client.get(url)
         self.assertTrue(r.status_code == 200)
-        expected = {u'Error Info': u'Failed to get thumbnail for display image for 9999ApJ..VVVVQPPPPI', u'Error': u'Unable to get results!'}
+        expected = {u'Error Info': u'Failed to get thumbnail for display image for 9999BBBBBVVVVQPPPPI', u'Error': u'Unable to get results!'}
         self.assertTrue(r.json == expected)
 
     @mock.patch('graphics_service.models.execute_SQL_query')
@@ -136,7 +134,7 @@ class TestExpectedResults(TestCase):
         url = url_for('graphics', bibcode='foo')
         r = self.client.get(url)
         self.assertTrue(r.status_code == 200)
-        expected = {u'Error Info': u'No figure data for foo', u'Error': u'Unable to get results!'}
+        expected = {u'Error Info': u'No thumbnail data for foo', u'Error': u'Unable to get results!'}
         self.assertTrue(r.json == expected)
 
     @mock.patch('graphics_service.models.execute_SQL_query', return_value=get_testdata(figures=figure_data, source='IOP'))
