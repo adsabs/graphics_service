@@ -17,7 +17,11 @@ def get_graphics(bibcode):
     # Query graphics database with bibcode supplied
     results = get_graphics_record(bibcode)
     if results and 'thumbnails' in results:
-        if len(results['thumbnails']) == 0:
+        try:
+            thumbnail_count = len(results['thumbnails'])
+        except:
+            thumbnail_count = 0
+        if thumbnail_count == 0:
             # No thumbnails = nothing to display
             return {'Error': 'Unable to get results!', 'Error Info': 'No thumbnail data for %s' % bibcode}
         output = {}
