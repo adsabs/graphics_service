@@ -3,3 +3,7 @@ alembic==0.8.9
 future==0.18.2
 psycopg2==2.8.3
 simplejson==3.10.0
+jinja2==2.11.3
+itsdangerous<=2.0.1
+markupsafe<=2.0.1
+werkzeug<=2.0.3
