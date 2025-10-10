@@ -13,9 +13,9 @@ from .models import get_graphics_record
 
 graph_link = '<a href="graphics" border=0><img src="%s"></a>'
 
-def get_graphics(bibcode):
-    # Query graphics database with bibcode supplied
-    results = get_graphics_record(bibcode)
+def get_graphics(identifier):
+    # Query graphics database with identifier supplied
+    results = get_graphics_record(identifier)
     if results and 'thumbnails' in results:
         try:
             thumbnail_count = len(results['thumbnails'])
@@ -23,14 +23,17 @@ def get_graphics(bibcode):
             thumbnail_count = 0
         if thumbnail_count == 0:
             # No thumbnails = nothing to display
-            return {'Error': 'Unable to get results!', 'Error Info': 'No thumbnail data for %s' % bibcode}
+            return {'Error': 'Unable to get results!', 'Error Info': 'No thumbnail data for %s' % identifier}
         output = {}
         source = results.get('source', 'NA')
-        output['bibcode'] = results['bibcode']
+        output['scix_id'] = results['scix_id']
+        # We still include the value in the "bibcode" column in the output
+        # For backwards compatibility
+        output['bibcode'] = results.get('bibcode')
         output['number'] = len(results['thumbnails'])
         output['pick'] = graph_link % random.choice(results['thumbnails'])
         if not output['pick'].find('http') >-1:
-            return {'Error': 'Unable to get results!', 'Error Info': 'Failed to get thumbnail for display image for %s' % output['bibcode']}
+            return {'Error': 'Unable to get results!', 'Error Info': 'Failed to get thumbnail for display image for %s' % output['scix_id']}
         # Create this convoluted construct for backwards compatibility
         output['figures'] = []
         n=1
@@ -44,9 +47,6 @@ def get_graphics(bibcode):
             output['figures'].append(fig_data)
             n+=1
         if source in current_app.config.get('GRAPHICS_EXTSOURCES'):
-            # Non-AAS journals link to IOPscience, rather than AIE
-            if source == "IOP" and bibcode[4:9] not in ['ApJ..','ApJS.','AJ...']:
-                source = "IOPscience"
             header = current_app.config.get('GRAPHICS_HEADER').get(source,'')
             output['header'] =  header
         elif source.upper() == 'ARXIV' \
@@ -55,7 +55,8 @@ def get_graphics(bibcode):
         elif source.upper() == 'TEST':
             output['pick'] = random.choice(results['thumbnails'])
         else:
-            output = {'Error': 'Unable to get results!', 'Error Info': 'Unknown data source %s' % source} 
+            output = {'Error': 'Unable to get results!', 'Error Info': 'Unknown data source %s' % source}
+
         return output
 
     return results

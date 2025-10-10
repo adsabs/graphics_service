@@ -12,9 +12,9 @@ class Graphics(Resource):
     rate_limit = [1000, 60 * 60 * 24]
     decorators = [advertise('scopes', 'rate_limit')]
 
-    def get(self, bibcode):
+    def get(self, identifier):
         stime = time.time()
-        results = get_graphics(bibcode)
+        results = get_graphics(identifier)
         duration = time.time() - stime
-        current_app.logger.info('Graphics for %s in %s user seconds'%(bibcode, duration))
+        current_app.logger.info('Graphics for %s in %s user seconds'%(identifier, duration))
         return results, 200

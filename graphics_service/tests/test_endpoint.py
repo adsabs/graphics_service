@@ -18,10 +18,11 @@ import simplejson as json
 import mock
 from datetime import datetime
 
-def get_testdata(figures = [], thumbnails=[], source='TEST'):
+def get_testdata(figures = [], thumbnails=[], source='TEST', bibcode='9999BBBBBVVVVQPPPPI'):
     thumbs = [(f['images'][0].get('thumbnail',''),f['images'][0].get('thumnail','')) for f in figures]
     g = GraphicsModel(
-        bibcode='9999BBBBBVVVVQPPPPI',
+        bibcode=bibcode,
+        scix_id='scix:5EZ7-KFJK-SXW9',
         doi='DOI',
         source=source,
         eprint=False,
@@ -32,16 +33,27 @@ def get_testdata(figures = [], thumbnails=[], source='TEST'):
     results = json.loads(json.dumps(g, cls=AlchemyEncoder))
     return results
 
-class TestExpectedResults(TestCase):
-    figure_data = [{'images': [{'thumbnail': 'http://fg1_thumb_url', 'highres':''}], 
+figure_data = [{'images': [{'thumbnail': 'http://fg1_thumb_url', 'highres':''}], 
                 'figure_caption': '', 
                 'figure_label': 'Figure 1', 
                 'figure_type': u''}]
 
-    figure_data_no_thumb = [{"images": [{"image_id": "fg1", "format": "gif"}],
+figure_data_no_thumb = [{"images": [{"image_id": "fg1", "format": "gif"}],
                 "figure_caption": "Figure 1",
                 "figure_label": "Figure 1",
                 "figure_id": "fg1"}]
+
+class TestExpectedResults(TestCase):
+
+#    figure_data = [{'images': [{'thumbnail': 'http://fg1_thumb_url', 'highres':''}], 
+#                'figure_caption': '', 
+#                'figure_label': 'Figure 1', 
+#                'figure_type': u''}]
+#
+#    figure_data_no_thumb = [{"images": [{"image_id": "fg1", "format": "gif"}],
+#                "figure_caption": "Figure 1",
+#                "figure_label": "Figure 1",
+#                "figure_id": "fg1"}]
 
     def create_app(self):
         '''Create the wsgi application'''
@@ -58,40 +70,63 @@ class TestExpectedResults(TestCase):
         uc = Column(String)
         dc = Column(DateTime)
         cols_expect = list(map(
-            type, [ic.type, sc.type, sc.type, sc.type, bc.type,
+            type, [ic.type, sc.type, sc.type, sc.type, sc.type, bc.type,
                    jc.type, tc.type, uc.type, dc.type]))
+
         self.assertEqual([type(c.type)
                           for c in GraphicsModel.__table__.columns],
                          cols_expect)
 
     @mock.patch('graphics_service.models.execute_SQL_query', return_value=get_testdata(figures=figure_data))
-    def test_query(self, mock_execute_SQL_query):
-        '''Query endpoint with bibcode from stub data should
+    def test_query_with_scixid(self, mock_execute_SQL_query):
+        '''Query endpoint with SciX ID from stub data should
            return expected results'''
-        url = url_for('graphics', bibcode='9999BBBBBVVVVQPPPPI')
+        url = url_for('graphics', identifier='scix:5EZ7-KFJK-SXW9')
         r = self.client.get(url)
         self.assertTrue(r.status_code == 200)
-        self.assertTrue(r.json.get('figures') == self.figure_data)
+        self.assertTrue(r.json.get('figures') == figure_data)
+        self.assertTrue(r.json.get('scix_id') == 'scix:5EZ7-KFJK-SXW9')
+
+    @mock.patch('graphics_service.models.execute_SQL_query', return_value=get_testdata(figures=figure_data, bibcode=None))
+    def test_query_with_scixid_without_bibcode(self, mock_execute_SQL_query):
+        '''Query endpoint with SciX ID from stub data should
+           return expected results'''
+        url = url_for('graphics', identifier='scix:5EZ7-KFJK-SXW9')
+        r = self.client.get(url)
+        self.assertTrue(r.status_code == 200)
+        self.assertTrue(r.json.get('figures') == figure_data)
+        self.assertTrue(r.json.get('scix_id') == 'scix:5EZ7-KFJK-SXW9')
+
+    @mock.patch('graphics_service.models.execute_SQL_query', return_value=get_testdata(figures=figure_data))
+    def test_query_with_bibcode(self, mock_execute_SQL_query):
+        '''Query endpoint with bibcode from stub data should
+           return expected results'''
+        url = url_for('graphics', identifier='9999BBBBBVVVVQPPPPI')
+        r = self.client.get(url)
+        self.assertTrue(r.status_code == 200)
+        self.assertTrue(r.json.get('figures') == figure_data)
+        self.assertTrue(r.json.get('scix_id') == 'scix:5EZ7-KFJK-SXW9')
+        # The bibcode is still returned for backwards compatibility and testing
         self.assertTrue(r.json.get('bibcode') == '9999BBBBBVVVVQPPPPI')
 
     @mock.patch('graphics_service.models.execute_SQL_query', return_value=get_testdata(figures=figure_data_no_thumb, source='IOP'))
     def test_query_no_thumbnail(self, mock_execute_SQL_query):
         '''Query endpoint with bibcode from stub data should
            return expected results'''
-        url = url_for('graphics', bibcode='9999ApJ..VVVVQPPPPI')
+        url = url_for('graphics', identifier='scix:5EZ7-KFJK-SXW9')
         r = self.client.get(url)
         self.assertTrue(r.status_code == 200)
-        expected = {u'Error Info': u'Failed to get thumbnail for display image for 9999BBBBBVVVVQPPPPI', u'Error': u'Unable to get results!'}
+        expected = {u'Error Info': u'Failed to get thumbnail for display image for scix:5EZ7-KFJK-SXW9', u'Error': u'Unable to get results!'}
         self.assertTrue(r.json == expected)
 
     @mock.patch('graphics_service.models.execute_SQL_query', return_value=get_testdata(figures=figure_data_no_thumb, source='ARXIV'))
     def test_query_no_thumbnail_2(self, mock_execute_SQL_query):
         '''Query endpoint with bibcode from stub data should
            return expected results'''
-        url = url_for('graphics', bibcode='9999ApJ..VVVVQPPPPI')
+        url = url_for('graphics', identifier='scix:5EZ7-KFJK-SXW9')
         r = self.client.get(url)
         self.assertTrue(r.status_code == 200)
-        expected = {u'Error Info': u'Failed to get thumbnail for display image for 9999BBBBBVVVVQPPPPI', u'Error': u'Unable to get results!'}
+        expected = {u'Error Info': u'Failed to get thumbnail for display image for scix:5EZ7-KFJK-SXW9', u'Error': u'Unable to get results!'}
         self.assertTrue(r.json == expected)
 
     @mock.patch('graphics_service.models.execute_SQL_query')
@@ -99,7 +134,7 @@ class TestExpectedResults(TestCase):
         ''''An exception is returned representing the absence of
             a database connection'''
         mock_execute_SQL_query.side_effect = Exception('something went wrong')
-        url = url_for('graphics', bibcode='foo')
+        url = url_for('graphics', identifier='foo')
         r = self.client.get(url)
         self.assertTrue(r.status_code == 200)
         expected = {u'Error Info': u'Graphics query failed for foo: something went wrong', u'Error': u'Unable to get results!'}
@@ -110,7 +145,7 @@ class TestExpectedResults(TestCase):
         ''''An exception is returned representing the absence of
             a record in the database'''
         mock_execute_SQL_query.side_effect = NoResultFound
-        url = url_for('graphics', bibcode='foo')
+        url = url_for('graphics', identifier='foo')
         r = self.client.get(url)
         self.assertTrue(r.status_code == 200)
         expected = {u'Error Info': u'No database entry found for foo', u'Error': u'Unable to get results!'}
@@ -121,7 +156,7 @@ class TestExpectedResults(TestCase):
     def test_query_error(self, mock_execute_SQL_query):
         ''''An exception is returned representing the absence of
             a database connection'''
-        url = url_for('graphics', bibcode='foo')
+        url = url_for('graphics', identifier='foo')
         r = self.client.get(url)
         self.assertTrue(r.status_code == 200)
         expected = {u'Error Info': u'info', u'Error': u'error'}
@@ -131,18 +166,18 @@ class TestExpectedResults(TestCase):
     def test_query_no_data(self, mock_execute_SQL_query):
         '''Query endpoint with bibcode from stub data should
            return expected results'''
-        url = url_for('graphics', bibcode='foo')
+        url = url_for('graphics', identifier='foo')
         r = self.client.get(url)
         self.assertTrue(r.status_code == 200)
         expected = {u'Error Info': u'No thumbnail data for foo', u'Error': u'Unable to get results!'}
         self.assertTrue(r.json == expected)
 
-    @mock.patch('graphics_service.models.execute_SQL_query', return_value=get_testdata(figures=figure_data, source='IOP'))
+    @mock.patch('graphics_service.models.execute_SQL_query', return_value=get_testdata(figures=figure_data, source='AAS'))
     def test_query_IOPScience(self, mock_execute_SQL_query):
         '''Query endpoint with bibcode from stub data should
            return expected results'''
-        header = self.app.config.get('GRAPHICS_HEADER').get('IOPscience')
-        url = url_for('graphics', bibcode='9999BBBBBVVVVQPPPPI')
+        header = self.app.config.get('GRAPHICS_HEADER').get('AAS')
+        url = url_for('graphics', identifier='scix:5EZ7-KFJK-SXW9')
         r = self.client.get(url)
         self.assertTrue(r.status_code == 200)
         self.assertEqual(r.json['header'], header)
@@ -152,7 +187,7 @@ class TestExpectedResults(TestCase):
         '''Query endpoint with bibcode from stub data should
            return expected results'''
         header = self.app.config.get('GRAPHICS_HEADER').get('IOP')
-        url = url_for('graphics', bibcode='9999ApJ..VVVVQPPPPI')
+        url = url_for('graphics', identifier='scix:5EZ7-KFJK-SXW9')
         r = self.client.get(url)
         self.assertTrue(r.status_code == 200)
         self.assertEqual(r.json['header'], header)
@@ -162,7 +197,7 @@ class TestExpectedResults(TestCase):
         '''Query endpoint with bibcode from stub data should
            return expected results'''
         header = self.app.config.get('GRAPHICS_HEADER').get('EDP')
-        url = url_for('graphics', bibcode='9999BBBBBVVVVQPPPPI')
+        url = url_for('graphics', identifier='scix:5EZ7-KFJK-SXW9')
         r = self.client.get(url)
         self.assertTrue(r.status_code == 200)
         self.assertEqual(r.json['header'], header)
@@ -172,7 +207,7 @@ class TestExpectedResults(TestCase):
         '''Query endpoint with bibcode from stub data should
            return expected results'''
         header = self.app.config.get('GRAPHICS_HEADER').get('Elsevier')
-        url = url_for('graphics', bibcode='9999BBBBBVVVVQPPPPI')
+        url = url_for('graphics', identifier='scix:5EZ7-KFJK-SXW9')
         r = self.client.get(url)
         self.assertTrue(r.status_code == 200)
         self.assertEqual(r.json['header'], header)
@@ -181,7 +216,7 @@ class TestExpectedResults(TestCase):
     def test_query_arXiv(self, mock_execute_SQL_query):
         '''Query endpoint with bibcode from stub data should
            return expected results'''
-        url = url_for('graphics', bibcode='9999BBBBBVVVVQPPPPI')
+        url = url_for('graphics', identifier='scix:5EZ7-KFJK-SXW9')
         r = self.client.get(url)
         header = 'Images extracted from the arXiv e-print'
         self.assertTrue(r.status_code == 200)
@@ -191,7 +226,7 @@ class TestExpectedResults(TestCase):
     def test_query_unknown_source(self, mock_execute_SQL_query):
         '''Query endpoint with bibcode from stub data should
            return expected results'''
-        url = url_for('graphics', bibcode='9999BBBBBVVVVQPPPPI')
+        url = url_for('graphics', identifier='scix:5EZ7-KFJK-SXW9')
         r = self.client.get(url)
         self.assertTrue(r.status_code == 200)
         expected = {u'Error Info': u'Unknown data source FOO', u'Error': u'Unable to get results!'}

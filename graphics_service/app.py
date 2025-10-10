@@ -21,7 +21,7 @@ def create_app(**config):
     app.url_map.strict_slashes = False
 
     api = Api(app)
-    api.add_resource(Graphics, '/<string:bibcode>')
+    api.add_resource(Graphics, '/<string:identifier>')
 
     Discoverer(app)
 

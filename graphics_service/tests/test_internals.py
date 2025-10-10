@@ -15,6 +15,7 @@ from datetime import datetime
 def get_testdata(figures = []):
     g = GraphicsModel(
         bibcode='9999BBBBBVVVVQPPPPI',
+        scix_id='scix:5EZ7-KFJK-SXW9',
         doi='DOI',
         source='TEST',
         eprint=False,
@@ -45,6 +46,7 @@ class TestUtils(TestCase):
 
         g = GraphicsModel(
                 bibcode='bibcode',
+                scix_id='scix_id',
                 doi='DOI',
                 source='TEST',
                 eprint=False,
@@ -54,7 +56,7 @@ class TestUtils(TestCase):
         results = json.loads(json.dumps(g, cls=AlchemyEncoder))
         expected = {'modtime': None, 'bibcode': 'bibcode', 'thumbnails': None,
                     'baseurl': None, 'source': 'TEST', 'doi': 'DOI', 'figures': [],
-                    'eprint': False, 'id': None}
+                    'eprint': False, 'id': None, 'scix_id': 'scix_id'}
         self.assertTrue(results==expected)
 
 class TestLocalConfig(TestCase):
@@ -78,6 +80,7 @@ class TestDatabaseQuery(TestCase):
         '''Create the wsgi application'''
         g = GraphicsModel(
                 bibcode='bibcode',
+                scix_id='scix_id',
                 doi='DOI',
                 source='TEST',
                 eprint=False,
